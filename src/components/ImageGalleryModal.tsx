@@ -54,7 +54,7 @@ const ImageGalleryModal = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Handle swipe gestures
+  // Handle touch swipe gestures
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
@@ -83,15 +83,66 @@ const ImageGalleryModal = ({
     setTouchEnd(null);
   };
 
+  // Handle mouse drag events for desktop
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState<number | null>(null);
+  const [dragEnd, setDragEnd] = useState<number | null>(null);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragStart(e.clientX);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      setDragEnd(e.clientX);
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging || !dragStart || !dragEnd) {
+      setIsDragging(false);
+      setDragStart(null);
+      setDragEnd(null);
+      return;
+    }
+    
+    const distance = dragStart - dragEnd;
+    const isLeftDrag = distance > 50;
+    const isRightDrag = distance < -50;
+
+    if (isLeftDrag) {
+      handleNext();
+    } else if (isRightDrag) {
+      handlePrevious();
+    }
+
+    setIsDragging(false);
+    setDragStart(null);
+    setDragEnd(null);
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false);
+      setDragStart(null);
+      setDragEnd(null);
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-w-[90vw] h-[90vh] p-0 border-none bg-transparent shadow-none">
         <div className="relative w-full h-full flex items-center justify-center">
           <div 
-            className="w-full h-full flex items-center justify-center bg-black/90 rounded-lg"
+            className={`w-full h-full flex items-center justify-center bg-black/90 rounded-lg ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
           >
             <button 
               onClick={onClose}
@@ -111,6 +162,7 @@ const ImageGalleryModal = ({
               src={images[currentIndex]} 
               alt={`Image ${currentIndex + 1}`}
               className="max-h-full max-w-full object-contain"
+              draggable="false"
             />
             
             <button 
