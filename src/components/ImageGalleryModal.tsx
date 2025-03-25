@@ -13,12 +13,12 @@ interface ImageGalleryModalProps {
   initialIndex: number;
 }
 
-const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
+const ImageGalleryModal = ({
   isOpen,
   onClose,
   images,
   initialIndex
-}) => {
+}: ImageGalleryModalProps) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   
   // Reset to initial index when modal opens
