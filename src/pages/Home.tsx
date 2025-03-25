@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight, Star, Shield, Car, Search, FileText, Truck } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
@@ -6,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import VehicleCard from "@/components/VehicleCard";
 
-// API function to fetch featured listings
+// API functions to fetch data
 const fetchFeaturedListings = async () => {
   const response = await fetch("https://admin.bpraceloc.com/api/featured");
   if (!response.ok) {
@@ -15,18 +14,35 @@ const fetchFeaturedListings = async () => {
   return response.json();
 };
 
+const fetchHeaderData = async () => {
+  const response = await fetch("https://admin.bpraceloc.com/api/hearder");
+  if (!response.ok) {
+    throw new Error("Failed to fetch header data");
+  }
+  return response.json();
+};
+
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const heroImages = [
-    "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=2000&h=1200",
-    "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=2000&h=1200",
-    "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=2000&h=1200",
-  ];
   
   // Fetch featured listings using React Query
-  const { data: featuredData, isLoading, error } = useQuery({
+  const { 
+    data: featuredData, 
+    isLoading: isFeaturedLoading, 
+    error: featuredError 
+  } = useQuery({
     queryKey: ['featuredListings'],
     queryFn: fetchFeaturedListings
+  });
+  
+  // Fetch header data using React Query
+  const {
+    data: headerData,
+    isLoading: isHeaderLoading,
+    error: headerError
+  } = useQuery({
+    queryKey: ['headerData'],
+    queryFn: fetchHeaderData
   });
   
   // Testimonials
@@ -46,6 +62,15 @@ const Home = () => {
       author: "Sarah Johnson",
       role: "Verified Buyer"
     }
+  ];
+  
+  // Format the header images from API
+  const heroImages = headerData?.data?.hearder?.map(
+    (item) => `https://admin.bpraceloc.com/storage/${item.image}`
+  ) || [
+    "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=2000&h=1200",
+    "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=2000&h=1200",
+    "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=2000&h=1200",
   ];
   
   // Hero image carousel
@@ -78,6 +103,22 @@ const Home = () => {
   
   const featuredVehicles = formatFeaturedListings();
   
+  // Get current header data
+  const getCurrentHeaderData = () => {
+    if (!headerData?.data?.hearder || headerData.data.hearder.length === 0) {
+      return {
+        title: "Discover Your Perfect Drive",
+        description: "Premium vehicles with transparent pricing and seamless experience."
+      };
+    }
+    return {
+      title: headerData.data.hearder[currentImageIndex]?.title || "Discover Your Perfect Drive",
+      description: headerData.data.hearder[currentImageIndex]?.description || "Premium vehicles with transparent pricing and seamless experience."
+    };
+  };
+  
+  const currentHeader = getCurrentHeaderData();
+  
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
@@ -103,10 +144,10 @@ const Home = () => {
         <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center">
           <div className="max-w-2xl animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-medium text-white mb-4">
-              Discover Your Perfect Drive
+              {currentHeader.title}
             </h1>
             <p className="text-lg md:text-xl text-white/80 mb-8">
-              Premium vehicles with transparent pricing and seamless experience.
+              {currentHeader.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/vehicles">
