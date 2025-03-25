@@ -3,7 +3,17 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Star, Shield, Car, Search, FileText, Truck } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
 import { useState, useEffect } from "react";
-import { vehicles } from "@/data/vehicles";
+import { useQuery } from "@tanstack/react-query";
+import VehicleCard from "@/components/VehicleCard";
+
+// API function to fetch featured listings
+const fetchFeaturedListings = async () => {
+  const response = await fetch("https://admin.bpraceloc.com/api/featured");
+  if (!response.ok) {
+    throw new Error("Failed to fetch featured listings");
+  }
+  return response.json();
+};
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -13,8 +23,11 @@ const Home = () => {
     "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=2000&h=1200",
   ];
   
-  // Featured vehicles from the data file
-  const featuredVehicles = vehicles.slice(0, 3);
+  // Fetch featured listings using React Query
+  const { data: featuredData, isLoading, error } = useQuery({
+    queryKey: ['featuredListings'],
+    queryFn: fetchFeaturedListings
+  });
   
   // Testimonials
   const testimonials = [
@@ -45,6 +58,25 @@ const Home = () => {
     
     return () => clearInterval(interval);
   }, [heroImages.length]);
+  
+  // Format API data for the VehicleCard component
+  const formatFeaturedListings = () => {
+    if (!featuredData || !featuredData.data || !featuredData.data.featured_listings) {
+      return [];
+    }
+    
+    return featuredData.data.featured_listings.map(listing => ({
+      id: listing.id.toString(),
+      title: listing.name,
+      price: parseFloat(listing.price),
+      year: parseInt(listing.year),
+      mileage: listing.mileage,
+      image: `https://admin.bpraceloc.com/storage/${listing.gallery[0]}`,
+      location: listing.location
+    }));
+  };
+  
+  const featuredVehicles = formatFeaturedListings();
   
   return (
     <div className="animate-fade-in">
@@ -128,36 +160,35 @@ const Home = () => {
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredVehicles.map((vehicle) => (
-              <div key={vehicle.id} className="group overflow-hidden neo-morph hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                <Link to={`/vehicles/${vehicle.id}`}>
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <img 
-                      src={vehicle.images[0]} 
-                      alt={vehicle.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  
-                  <div className="p-4 bg-white">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-medium text-base md:text-lg truncate">{vehicle.title}</h3>
-                      <span className="text-primary font-medium">${vehicle.price.toLocaleString()}</span>
-                    </div>
-                    
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <span>{vehicle.year}</span>
-                      <span className="mx-2">•</span>
-                      <span>{vehicle.mileage.toLocaleString()} mi</span>
-                      <span className="mx-2">•</span>
-                      <span className="truncate">{vehicle.location}</span>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="py-16 text-center">
+              <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin mx-auto"></div>
+              <p className="mt-4 text-muted-foreground">Loading featured vehicles...</p>
+            </div>
+          ) : error ? (
+            <div className="py-16 text-center">
+              <p className="text-muted-foreground">Unable to load featured vehicles at this time.</p>
+            </div>
+          ) : featuredVehicles.length === 0 ? (
+            <div className="py-16 text-center">
+              <p className="text-muted-foreground">No featured vehicles available at this time.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredVehicles.map((vehicle) => (
+                <VehicleCard
+                  key={vehicle.id}
+                  id={vehicle.id}
+                  title={vehicle.title}
+                  price={vehicle.price}
+                  year={vehicle.year}
+                  mileage={vehicle.mileage}
+                  image={vehicle.image}
+                  location={vehicle.location}
+                />
+              ))}
+            </div>
+          )}
           
           <div className="mt-12 text-center">
             <Link to="/vehicles">
