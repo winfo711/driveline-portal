@@ -32,6 +32,11 @@ const VehicleCard = ({ id, title, price, year, mileage, image, location }: Vehic
           className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${imageLoaded ? 'block' : 'hidden'}`}
           onLoad={() => setImageLoaded(true)}
         />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+          <span className="px-3 py-1.5 bg-white/90 rounded-md text-sm font-medium transform translate-y-2 group-hover:translate-y-0 transition-transform">
+            View Details
+          </span>
+        </div>
       </div>
       
       <div className="p-4 bg-white">

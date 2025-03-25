@@ -1,14 +1,15 @@
-
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getVehicleById } from "@/data/vehicles";
 import { ArrowLeft, Star, Shield, Calendar, Car, MapPin, GaugeCircle, Clock, Fuel, Settings, Key, CircleDollarSign } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
 import { useToast } from "@/hooks/use-toast";
+import ImageGalleryModal from "@/components/ImageGalleryModal";
 
 const VehicleDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [galleryOpen, setGalleryOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   
@@ -41,6 +42,11 @@ const VehicleDetail = () => {
     });
   };
   
+  const openGallery = (index: number) => {
+    setCurrentImageIndex(index);
+    setGalleryOpen(true);
+  };
+  
   return (
     <div className="page-container">
       {/* Back Button */}
@@ -60,7 +66,7 @@ const VehicleDetail = () => {
         <div className="lg:col-span-2 space-y-8">
           {/* Image Gallery */}
           <div className="neo-morph overflow-hidden">
-            <div className="relative aspect-[16/9] overflow-hidden">
+            <div className="relative aspect-[16/9] overflow-hidden cursor-pointer" onClick={() => openGallery(currentImageIndex)}>
               <img 
                 src={vehicle.images[currentImageIndex]} 
                 alt={vehicle.title}
@@ -68,15 +74,21 @@ const VehicleDetail = () => {
               />
               
               <button 
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center shadow-md backdrop-blur-sm hover:bg-white transition-colors"
-                onClick={handlePrevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center shadow-md backdrop-blur-sm hover:bg-white transition-colors z-10"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrevImage();
+                }}
               >
                 <ArrowLeft className="h-5 w-5" />
               </button>
               
               <button 
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center shadow-md backdrop-blur-sm hover:bg-white transition-colors"
-                onClick={handleNextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center shadow-md backdrop-blur-sm hover:bg-white transition-colors z-10"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNextImage();
+                }}
               >
                 <ArrowLeft className="h-5 w-5 transform rotate-180" />
               </button>
@@ -89,7 +101,7 @@ const VehicleDetail = () => {
                   className={`aspect-[16/9] overflow-hidden border-2 rounded transition-colors ${
                     index === currentImageIndex ? "border-primary" : "border-transparent"
                   }`}
-                  onClick={() => setCurrentImageIndex(index)}
+                  onClick={() => openGallery(index)}
                 >
                   <img 
                     src={image} 
@@ -268,6 +280,14 @@ const VehicleDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* Fullscreen Image Gallery Modal */}
+      <ImageGalleryModal 
+        isOpen={galleryOpen}
+        onClose={() => setGalleryOpen(false)}
+        images={vehicle.images}
+        initialIndex={currentImageIndex}
+      />
     </div>
   );
 };
