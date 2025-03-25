@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -151,26 +151,12 @@ const ImageGalleryModal = ({
               <X className="h-6 w-6 text-white" />
             </button>
             
-            <button 
-              onClick={handlePrevious}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 bg-black/50 backdrop-blur-sm rounded-full hover:bg-black/80 transition-colors"
-            >
-              <ArrowLeft className="h-6 w-6 text-white" />
-            </button>
-            
             <img 
               src={images[currentIndex]} 
               alt={`Image ${currentIndex + 1}`}
               className="max-h-full max-w-full object-contain"
               draggable="false"
             />
-            
-            <button 
-              onClick={handleNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-3 bg-black/50 backdrop-blur-sm rounded-full hover:bg-black/80 transition-colors"
-            >
-              <ArrowRight className="h-6 w-6 text-white" />
-            </button>
             
             <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
               {images.map((_, index) => (
