@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import VehicleCard from "@/components/VehicleCard";
 import { Search, SlidersHorizontal, X } from "lucide-react";
@@ -63,11 +62,12 @@ const Vehicles = () => {
     data: vehiclesData,
     isLoading,
     error,
-    isFetching
+    isFetching,
+    isPreviousData
   } = useQuery({
     queryKey: ['vehicles', currentPage],
     queryFn: () => fetchVehicles(currentPage),
-    keepPreviousData: true
+    staleTime: 60000, // 1 minute
   });
   
   const vehicles: Vehicle[] = vehiclesData?.data?.cars?.data || [];
@@ -83,81 +83,61 @@ const Vehicles = () => {
       }
     : null;
   
-  // Filter vehicles based on search query and filters
   const filteredVehicles = vehicles.filter((vehicle) => {
-    // Search query filter
     const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          vehicle.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          vehicle.make.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          vehicle.model.toLowerCase().includes(searchQuery.toLowerCase());
     
-    // Price range filter
     const vehiclePrice = parseFloat(vehicle.price);
     const matchesPrice = vehiclePrice >= priceRange[0] && vehiclePrice <= priceRange[1];
     
-    // Year range filter
     const vehicleYear = parseInt(vehicle.year);
     const matchesYear = vehicleYear >= yearRange[0] && vehicleYear <= yearRange[1];
     
     return matchesSearch && matchesPrice && matchesYear;
   });
   
-  // Reset filters
   const resetFilters = () => {
     setSearchQuery("");
     setPriceRange([0, 200000]);
     setYearRange([2010, 2023]);
   };
   
-  // Handle pagination
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };
   
-  // Generate pagination items
   const generatePaginationItems = () => {
     if (!pagination) return null;
     
-    // Create an array of page numbers to display
     let pageNumbers = [];
     
-    // Always include first page, current page, and last page
-    // Then add pages around current page
-    const maxPagesToShow = 5;
-    
-    if (pagination.last_page <= maxPagesToShow) {
-      // If we have fewer pages than max, show all
+    if (pagination.last_page <= 5) {
       pageNumbers = Array.from({ length: pagination.last_page }, (_, i) => i + 1);
     } else {
-      // Always include page 1
       pageNumbers.push(1);
       
-      // Calculate range around current page
       let startPage = Math.max(2, pagination.current_page - 1);
       let endPage = Math.min(pagination.last_page - 1, pagination.current_page + 1);
       
-      // Add ellipsis after page 1 if necessary
       if (startPage > 2) {
-        pageNumbers.push(-1); // -1 represents ellipsis
+        pageNumbers.push(-1);
       }
       
-      // Add pages around current page
       for (let i = startPage; i <= endPage; i++) {
         pageNumbers.push(i);
       }
       
-      // Add ellipsis before last page if necessary
       if (endPage < pagination.last_page - 1) {
-        pageNumbers.push(-2); // -2 represents ellipsis
+        pageNumbers.push(-2);
       }
       
-      // Add last page
       pageNumbers.push(pagination.last_page);
     }
     
     return pageNumbers.map((pageNumber, index) => {
-      // If pageNumber is negative, it represents ellipsis
       if (pageNumber < 0) {
         return (
           <PaginationItem key={`ellipsis-${index}`}>
@@ -189,7 +169,6 @@ const Vehicles = () => {
       </div>
       
       <div className="mb-8 flex flex-col md:flex-row gap-4">
-        {/* Search Bar */}
         <div className="flex-1 relative">
           <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
             <Search className="h-5 w-5 text-muted-foreground" />
@@ -211,7 +190,6 @@ const Vehicles = () => {
           )}
         </div>
         
-        {/* Filter Toggle Button */}
         <button
           className={`neo-morph px-4 py-2.5 flex items-center gap-2 transition-colors ${
             filtersOpen ? "bg-primary text-primary-foreground" : ""
@@ -223,10 +201,8 @@ const Vehicles = () => {
         </button>
       </div>
       
-      {/* Filter Panel */}
       {filtersOpen && (
         <div className="mb-8 neo-morph p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-          {/* Price Range Filter */}
           <div>
             <h3 className="text-sm font-medium mb-3">Price Range</h3>
             <div className="space-y-2">
@@ -255,7 +231,6 @@ const Vehicles = () => {
             </div>
           </div>
           
-          {/* Year Range Filter */}
           <div>
             <h3 className="text-sm font-medium mb-3">Year Range</h3>
             <div className="space-y-2">
@@ -284,7 +259,6 @@ const Vehicles = () => {
             </div>
           </div>
           
-          {/* Reset Filters Button */}
           <div className="flex items-end">
             <button
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -296,7 +270,6 @@ const Vehicles = () => {
         </div>
       )}
       
-      {/* Loading and Error States */}
       {isLoading && (
         <div className="py-16 flex justify-center items-center">
           <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
@@ -316,7 +289,6 @@ const Vehicles = () => {
         </div>
       )}
       
-      {/* Results Count */}
       {!isLoading && !error && (
         <div className="mb-6">
           <p className="text-sm text-muted-foreground">
@@ -326,7 +298,6 @@ const Vehicles = () => {
         </div>
       )}
       
-      {/* Vehicle Grid */}
       {!isLoading && !error && (
         <>
           {filteredVehicles.length > 0 ? (
@@ -356,7 +327,6 @@ const Vehicles = () => {
             </div>
           )}
           
-          {/* Pagination */}
           {pagination && pagination.last_page > 1 && (
             <Pagination className="my-8">
               <PaginationContent>
@@ -383,7 +353,6 @@ const Vehicles = () => {
         </>
       )}
       
-      {/* Loading indicator for page changes */}
       {!isLoading && isFetching && (
         <div className="fixed bottom-4 right-4 bg-background/80 backdrop-blur-sm rounded-full shadow-lg p-3 flex items-center space-x-2">
           <div className="h-4 w-4 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
