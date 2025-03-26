@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import VehicleCard from "@/components/VehicleCard";
 import { Search, SlidersHorizontal, X } from "lucide-react";
@@ -62,8 +63,7 @@ const Vehicles = () => {
     data: vehiclesData,
     isLoading,
     error,
-    isFetching,
-    isPreviousData
+    isFetching
   } = useQuery({
     queryKey: ['vehicles', currentPage],
     queryFn: () => fetchVehicles(currentPage),
@@ -207,8 +207,8 @@ const Vehicles = () => {
             <h3 className="text-sm font-medium mb-3">Price Range</h3>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-sm text-muted-foreground">${priceRange[0].toLocaleString()}</span>
-                <span className="text-sm text-muted-foreground">${priceRange[1].toLocaleString()}</span>
+                <span className="text-sm text-muted-foreground">{priceRange[0].toLocaleString()} €</span>
+                <span className="text-sm text-muted-foreground">{priceRange[1].toLocaleString()} €</span>
               </div>
               <input
                 type="range"

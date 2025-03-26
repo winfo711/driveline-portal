@@ -59,7 +59,7 @@ const VehicleCard = ({ id, title, price, year, mileage, image, location }: Vehic
       <div className="p-4 bg-white">
         <div className="flex justify-between items-start mb-2">
           <h3 className="font-medium text-base md:text-lg truncate">{title}</h3>
-          <span className="text-primary font-medium">${price.toLocaleString()}</span>
+          <span className="text-primary font-medium">{price.toLocaleString()} €</span>
         </div>
         
         <div className="flex items-center text-sm text-muted-foreground mb-3">

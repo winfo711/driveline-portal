@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getVehicleById } from "@/data/vehicles";
@@ -222,7 +223,7 @@ const VehicleDetail = () => {
             </div>
             
             <div className="mb-6">
-              <div className="text-3xl font-medium text-primary">${vehicle.price.toLocaleString()}</div>
+              <div className="text-3xl font-medium text-primary">{vehicle.price.toLocaleString()} €</div>
               <div className="flex items-center mt-1 gap-1">
                 <CircleDollarSign className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">Financing Available</span>
