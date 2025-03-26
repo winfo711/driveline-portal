@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { ArrowRight, Star, Shield, Car, Search, FileText, Truck } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
@@ -201,12 +202,12 @@ const Home = () => {
             </Link>
           </div>
           
-          {isLoading ? (
+          {isFeaturedLoading ? (
             <div className="py-16 text-center">
               <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin mx-auto"></div>
               <p className="mt-4 text-muted-foreground">Loading featured vehicles...</p>
             </div>
-          ) : error ? (
+          ) : featuredError ? (
             <div className="py-16 text-center">
               <p className="text-muted-foreground">Unable to load featured vehicles at this time.</p>
             </div>
