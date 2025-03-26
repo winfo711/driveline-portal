@@ -122,7 +122,7 @@ const FAQ = () => {
                   {openItems[faq.question] && (
                     <div className="px-6 pb-6 animate-fade-in">
                       <div className="pt-2 border-t border-gray-100">
-                        <p className="text-muted-foreground leading-relaxed mt-4">
+                        <p className="text-foreground/85 leading-relaxed mt-4 text-base">
                           {faq.answer}
                         </p>
                       </div>
