@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface VehicleCardProps {
   id: string;
@@ -14,6 +15,13 @@ interface VehicleCardProps {
 
 const VehicleCard = ({ id, title, price, year, mileage, image, location }: VehicleCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  
+  const handleImageError = () => {
+    console.error(`Failed to load image: ${image}`);
+    setImageError(true);
+    setImageLoaded(true); // Still set as loaded to remove loading spinner
+  };
   
   return (
     <Link 
@@ -26,12 +34,21 @@ const VehicleCard = ({ id, title, price, year, mileage, image, location }: Vehic
             <div className="h-8 w-8 rounded-full border-2 border-gray-300 border-t-transparent animate-spin"></div>
           </div>
         </div>
-        <img 
-          src={image} 
-          alt={title}
-          className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${imageLoaded ? 'block' : 'hidden'}`}
-          onLoad={() => setImageLoaded(true)}
-        />
+        
+        {imageError ? (
+          <div className="w-full h-full flex items-center justify-center bg-gray-100">
+            <p className="text-sm text-muted-foreground">Image unavailable</p>
+          </div>
+        ) : (
+          <img 
+            src={image} 
+            alt={title}
+            className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${imageLoaded ? 'block' : 'hidden'}`}
+            onLoad={() => setImageLoaded(true)}
+            onError={handleImageError}
+          />
+        )}
+        
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
           <span className="px-3 py-1.5 bg-white/90 rounded-md text-sm font-medium transform translate-y-2 group-hover:translate-y-0 transition-transform">
             View Details
