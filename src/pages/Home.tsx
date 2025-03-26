@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight, Star, Shield, Car, Search, FileText, Truck } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
@@ -6,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import VehicleCard from "@/components/VehicleCard";
 
-// API functions to fetch data
 const fetchFeaturedListings = async () => {
   const response = await fetch("https://admin.bpraceloc.com/api/featured");
   if (!response.ok) {
@@ -26,7 +24,6 @@ const fetchHeaderData = async () => {
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-  // Fetch featured listings using React Query
   const { 
     data: featuredData, 
     isLoading: isFeaturedLoading, 
@@ -36,7 +33,6 @@ const Home = () => {
     queryFn: fetchFeaturedListings
   });
   
-  // Fetch header data using React Query
   const {
     data: headerData,
     isLoading: isHeaderLoading,
@@ -46,7 +42,6 @@ const Home = () => {
     queryFn: fetchHeaderData
   });
   
-  // Testimonials
   const testimonials = [
     {
       quote: "The most seamless car buying experience I've ever had. Everything from browsing to delivery was perfect.",
@@ -65,7 +60,6 @@ const Home = () => {
     }
   ];
   
-  // Format the header images from API
   const heroImages = headerData?.data?.hearder?.map(
     (item) => `https://admin.bpraceloc.com/storage/${item.image}`
   ) || [
@@ -74,7 +68,6 @@ const Home = () => {
     "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=2000&h=1200",
   ];
   
-  // Hero image carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => 
@@ -85,7 +78,6 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [heroImages.length]);
   
-  // Format API data for the VehicleCard component
   const formatFeaturedListings = () => {
     if (!featuredData || !featuredData.data || !featuredData.data.featured_listings) {
       return [];
@@ -104,7 +96,6 @@ const Home = () => {
   
   const featuredVehicles = formatFeaturedListings();
   
-  // Get current header data
   const getCurrentHeaderData = () => {
     if (!headerData?.data?.hearder || headerData.data.hearder.length === 0) {
       return {
@@ -122,9 +113,7 @@ const Home = () => {
   
   return (
     <div className="animate-fade-in">
-      {/* Hero Section */}
       <section className="relative h-[90vh] overflow-hidden">
-        {/* Hero Images */}
         {heroImages.map((image, index) => (
           <div 
             key={index}
@@ -184,7 +173,6 @@ const Home = () => {
           </div>
         </div>
         
-        {/* Scroll down indicator */}
         <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10 animate-bounce hidden md:block">
           <div className="w-8 h-12 rounded-full border-2 border-white/30 flex items-center justify-center">
             <div className="w-1.5 h-3 bg-white rounded-full animate-float" />
@@ -192,7 +180,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Vehicles */}
       <section className="py-16 md:py-24 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-10">
@@ -242,7 +229,6 @@ const Home = () => {
         </div>
       </section>
       
-      {/* How It Works */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -294,7 +280,6 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Testimonials */}
       <section className="py-16 md:py-24 bg-gradient-radial from-secondary to-secondary/20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -323,7 +308,28 @@ const Home = () => {
         </div>
       </section>
       
-      {/* CTA Section */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-2xl md:text-3xl font-medium mb-4">Google Verified Reviews</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              See what our clients are saying about us on Google.
+            </p>
+          </div>
+          
+          <div className="neo-morph p-4 rounded-xl">
+            <iframe 
+              style={{ width: '100%', height: '700px' }} 
+              scrolling="yes" 
+              className="responsive-item col-lg-12 col-md-12 col-sm-12" 
+              src="https://digitalreviews.icu/api/widgets/embedded/1/3?tabs=no&hide_search=yes" 
+              allowFullScreen
+              title="Google Verified Reviews"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+      
       <section className="py-16 md:py-24 bg-primary">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-3xl font-medium mb-4 text-primary-foreground">Ready to Find Your Dream Car?</h2>
