@@ -29,7 +29,7 @@ const PageLoader = () => (
   <div className="min-h-[50vh] flex items-center justify-center">
     <div className="neo-morph p-6 rounded-xl">
       <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin mx-auto"></div>
-      <p className="mt-4 text-center text-sm text-muted-foreground">Loading...</p>
+      <p className="mt-4 text-center text-sm text-muted-foreground">Chargement...</p>
     </div>
   </div>
 );

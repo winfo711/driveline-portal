@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import VehicleCard from "@/components/VehicleCard";
 import { Search, SlidersHorizontal, X } from "lucide-react";
