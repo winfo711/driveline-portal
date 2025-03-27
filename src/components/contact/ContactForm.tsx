@@ -19,6 +19,7 @@ const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -28,15 +29,26 @@ const ContactForm = () => {
     });
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
+    try {
+      const response = await fetch('https://admin.bpraceloc.com/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
       
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      
+      // Handle success
+      setIsSubmitted(true);
       toast({
         title: "Message Envoyé",
         description: "Nous avons bien reçu votre message et vous répondrons rapidement.",
@@ -54,7 +66,18 @@ const ContactForm = () => {
           message: "",
         });
       }, 2000);
-    }, 1500);
+      
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitError("Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.");
+      toast({
+        title: "Erreur",
+        description: "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -75,6 +98,12 @@ const ContactForm = () => {
           </p>
         </div>
       ) : null}
+      
+      {submitError && !isSubmitted && (
+        <Alert variant="destructive" className="mb-6">
+          <AlertDescription>{submitError}</AlertDescription>
+        </Alert>
+      )}
       
       <form onSubmit={handleSubmit} className={`space-y-6 transition-opacity duration-300 ${isSubmitted ? 'opacity-0' : 'opacity-100'}`}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
