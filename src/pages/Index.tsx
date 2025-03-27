@@ -21,7 +21,7 @@ const Index = () => {
           </a>
           <a 
             href="/how-it-works" 
-            className="px-6 py-3 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+            className="px-6 py-3 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors"
           >
             Comment Ça Marche
           </a>
