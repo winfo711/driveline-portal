@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatPrice(price: number): string {
-  return `${price.toLocaleString()} €`;
+export function formatPrice(price: number, currency?: string): string {
+  const currencySymbol = currency || '€';
+  return `${price.toLocaleString()} ${currencySymbol}`;
 }
