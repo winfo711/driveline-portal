@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import VehicleCard from "@/components/VehicleCard";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -312,6 +311,7 @@ const Vehicles = () => {
                   mileage={vehicle.mileage}
                   image={`https://admin.bpraceloc.com/storage/${vehicle.gallery[0]}`}
                   location={vehicle.location}
+                  slug={vehicle.slug}
                 />
               ))}
             </div>

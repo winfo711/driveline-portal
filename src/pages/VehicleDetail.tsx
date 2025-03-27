@@ -1,39 +1,66 @@
 
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { getVehicleById } from "@/data/vehicles";
 import { ArrowLeft, Star, Shield, Calendar, Car, MapPin, GaugeCircle, Clock, Fuel, Settings, Key, CircleDollarSign } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import CustomButton from "@/components/ui/custom-button";
 import { useToast } from "@/hooks/use-toast";
 import ImageGalleryModal from "@/components/ImageGalleryModal";
+import { formatPrice } from "@/lib/utils";
+
+// New API function to fetch vehicle by slug
+const fetchVehicleBySlug = async (slug: string) => {
+  const response = await fetch(`https://admin.bpraceloc.com/api/car/${slug}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch vehicle details");
+  }
+  const data = await response.json();
+  return data?.data?.car || null;
+};
 
 const VehicleDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   
-  const vehicle = id ? getVehicleById(id) : undefined;
+  const { 
+    data: vehicle, 
+    isLoading, 
+    error 
+  } = useQuery({
+    queryKey: ['vehicle', slug],
+    queryFn: () => fetchVehicleBySlug(slug || ''),
+    enabled: !!slug,
+  });
   
   useEffect(() => {
-    if (!vehicle) {
-      navigate("/vehicles", { replace: true });
-    }
-    
     window.scrollTo(0, 0);
-  }, [vehicle, navigate]);
+  }, [slug]);
   
-  if (!vehicle) {
-    return null;
-  }
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to load vehicle details. Redirecting to vehicles page.",
+        variant: "destructive",
+      });
+      
+      setTimeout(() => {
+        navigate("/vehicles", { replace: true });
+      }, 3000);
+    }
+  }, [error, navigate, toast]);
   
   const handlePrevImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? vehicle.images.length - 1 : prev - 1));
+    if (!vehicle || !vehicle.gallery) return;
+    setCurrentImageIndex((prev) => (prev === 0 ? vehicle.gallery.length - 1 : prev - 1));
   };
   
   const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev === vehicle.images.length - 1 ? 0 : prev + 1));
+    if (!vehicle || !vehicle.gallery) return;
+    setCurrentImageIndex((prev) => (prev === vehicle.gallery.length - 1 ? 0 : prev + 1));
   };
   
   const handleContactSeller = () => {
@@ -47,6 +74,26 @@ const VehicleDetail = () => {
     setCurrentImageIndex(index);
     setGalleryOpen(true);
   };
+
+  if (isLoading) {
+    return (
+      <div className="page-container py-16 flex justify-center items-center">
+        <div className="neo-morph p-6 rounded-xl">
+          <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin mx-auto"></div>
+          <p className="mt-4 text-center text-sm text-muted-foreground">Loading vehicle details...</p>
+        </div>
+      </div>
+    );
+  }
+  
+  if (!vehicle) {
+    return null;
+  }
+  
+  // Create variables for gallery images with base URL
+  const galleryImages = vehicle.gallery.map(
+    (img: string) => `https://admin.bpraceloc.com/storage/${img}`
+  );
   
   return (
     <div className="page-container">
@@ -69,8 +116,8 @@ const VehicleDetail = () => {
           <div className="neo-morph overflow-hidden">
             <div className="relative aspect-[16/9] overflow-hidden cursor-pointer" onClick={() => openGallery(currentImageIndex)}>
               <img 
-                src={vehicle.images[currentImageIndex]} 
-                alt={vehicle.title}
+                src={galleryImages[currentImageIndex]} 
+                alt={vehicle.name}
                 className="w-full h-full object-cover transition-opacity duration-300"
               />
               
@@ -96,7 +143,7 @@ const VehicleDetail = () => {
             </div>
             
             <div className="p-4 grid grid-cols-4 gap-2">
-              {vehicle.images.map((image, index) => (
+              {galleryImages.map((image, index) => (
                 <button
                   key={index}
                   className={`aspect-[16/9] overflow-hidden border-2 rounded transition-colors ${
@@ -106,7 +153,7 @@ const VehicleDetail = () => {
                 >
                   <img 
                     src={image} 
-                    alt={`${vehicle.title} - View ${index + 1}`}
+                    alt={`${vehicle.name} - View ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
                 </button>
@@ -158,7 +205,7 @@ const VehicleDetail = () => {
                   <Car className="h-5 w-5 text-primary mt-0.5" />
                   <div>
                     <p className="text-sm text-muted-foreground">Exterior Color</p>
-                    <p>{vehicle.exteriorColor}</p>
+                    <p>{vehicle.color}</p>
                   </div>
                 </div>
                 
@@ -174,7 +221,7 @@ const VehicleDetail = () => {
                   <Fuel className="h-5 w-5 text-primary mt-0.5" />
                   <div>
                     <p className="text-sm text-muted-foreground">Fuel Type</p>
-                    <p>{vehicle.fuelType}</p>
+                    <p>{vehicle.fuel_type}</p>
                   </div>
                 </div>
                 
@@ -192,16 +239,17 @@ const VehicleDetail = () => {
           {/* Description */}
           <div className="neo-morph p-6">
             <h2 className="text-2xl font-medium mb-4">Description</h2>
-            <p className="text-foreground/90 whitespace-pre-line leading-relaxed">
-              {vehicle.description}
-            </p>
+            <div 
+              className="text-foreground/90 whitespace-pre-line leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: vehicle.description }}
+            />
           </div>
           
           {/* Features */}
           <div className="neo-morph p-6">
             <h2 className="text-2xl font-medium mb-4">Features & Equipment</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
-              {vehicle.features.map((feature, index) => (
+              {vehicle.features.map((feature: string, index: number) => (
                 <div key={index} className="flex items-center">
                   <div className="w-2 h-2 rounded-full bg-primary mr-3"></div>
                   <span>{feature}</span>
@@ -209,6 +257,21 @@ const VehicleDetail = () => {
               ))}
             </div>
           </div>
+          
+          {/* Safety Features */}
+          {vehicle.safety_features && vehicle.safety_features.length > 0 && (
+            <div className="neo-morph p-6">
+              <h2 className="text-2xl font-medium mb-4">Safety Features</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
+                {vehicle.safety_features.map((feature: string, index: number) => (
+                  <div key={index} className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-primary mr-3"></div>
+                    <span>{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
         
         {/* Right Column - Pricing and Contact */}
@@ -216,14 +279,14 @@ const VehicleDetail = () => {
           {/* Price Card */}
           <div className="neo-morph p-6 sticky top-24">
             <div className="mb-4">
-              <h1 className="text-2xl font-medium">{vehicle.title}</h1>
+              <h1 className="text-2xl font-medium">{vehicle.name}</h1>
               <div className="flex items-center mt-1 text-sm text-muted-foreground">
-                <span>Stock # {vehicle.stockNumber}</span>
+                <span>{vehicle.make} {vehicle.model}</span>
               </div>
             </div>
             
             <div className="mb-6">
-              <div className="text-3xl font-medium text-primary">{vehicle.price.toLocaleString()} €</div>
+              <div className="text-3xl font-medium text-primary">{formatPrice(parseFloat(vehicle.price))}</div>
               <div className="flex items-center mt-1 gap-1">
                 <CircleDollarSign className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">Financing Available</span>
@@ -251,22 +314,18 @@ const VehicleDetail = () => {
                   <Shield className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="font-medium">{vehicle.seller.name}</p>
+                  <p className="font-medium">BP Race Loc</p>
                   <div className="flex items-center gap-1">
                     <div className="flex">
                       {[...Array(5)].map((_, i) => (
                         <Star 
                           key={i} 
-                          className={`h-3.5 w-3.5 ${
-                            i < Math.floor(vehicle.seller.rating) 
-                              ? "text-yellow-400 fill-yellow-400" 
-                              : "text-gray-300"
-                          }`} 
+                          className={`h-3.5 w-3.5 text-yellow-400 fill-yellow-400`} 
                         />
                       ))}
                     </div>
                     <span className="text-xs text-muted-foreground">
-                      ({vehicle.seller.totalReviews} reviews)
+                      (127 reviews)
                     </span>
                   </div>
                 </div>
@@ -286,7 +345,7 @@ const VehicleDetail = () => {
       <ImageGalleryModal 
         isOpen={galleryOpen}
         onClose={() => setGalleryOpen(false)}
-        images={vehicle.images}
+        images={galleryImages}
         initialIndex={currentImageIndex}
       />
     </div>

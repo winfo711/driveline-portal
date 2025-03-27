@@ -44,7 +44,7 @@ const App = () => (
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/vehicles" element={<Vehicles />} />
-              <Route path="/vehicles/:id" element={<VehicleDetail />} />
+              <Route path="/vehicles/:slug" element={<VehicleDetail />} /> {/* Updated to use slug */}
               <Route path="/how-it-works" element={<HowItWorks />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/contact" element={<Contact />} />
