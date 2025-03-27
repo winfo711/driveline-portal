@@ -22,13 +22,13 @@ const VehicleInfoCard = ({ vehicle, onContactSellerClick }: VehicleInfoCardProps
         <div className="text-3xl font-medium text-primary">{formatPrice(parseFloat(vehicle.price))}</div>
         <div className="flex items-center mt-1 gap-1">
           <CircleDollarSign className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm text-muted-foreground">Financing Available</span>
+          <span className="text-sm text-muted-foreground">Financement Disponible</span>
         </div>
       </div>
       
       <div className="space-y-4">
         <CustomButton className="w-full" size="lg">
-          Schedule Test Drive
+          Planifier un Essai
         </CustomButton>
         
         <CustomButton 
@@ -37,7 +37,7 @@ const VehicleInfoCard = ({ vehicle, onContactSellerClick }: VehicleInfoCardProps
           size="lg"
           onClick={onContactSellerClick}
         >
-          Contact Seller
+          Contacter le Vendeur
         </CustomButton>
       </div>
       
@@ -58,7 +58,7 @@ const VehicleInfoCard = ({ vehicle, onContactSellerClick }: VehicleInfoCardProps
                 ))}
               </div>
               <span className="text-xs text-muted-foreground">
-                (127 reviews)
+                (127 avis)
               </span>
             </div>
           </div>
@@ -66,7 +66,7 @@ const VehicleInfoCard = ({ vehicle, onContactSellerClick }: VehicleInfoCardProps
         
         <div className="mt-4 p-3 rounded-lg bg-secondary/50 text-sm">
           <p className="text-muted-foreground">
-            Typically responds within 1 hour
+            Répond généralement en moins d'une heure
           </p>
         </div>
       </div>

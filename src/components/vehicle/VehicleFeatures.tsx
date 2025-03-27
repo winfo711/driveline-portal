@@ -6,7 +6,7 @@ interface VehicleFeaturesProps {
 const VehicleFeatures = ({ features }: VehicleFeaturesProps) => {
   return (
     <div className="neo-morph p-6">
-      <h2 className="text-2xl font-medium mb-4">Features & Equipment</h2>
+      <h2 className="text-2xl font-medium mb-4">Caractéristiques & Équipements</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
         {features.map((feature: string, index: number) => (
           <div key={index} className="flex items-center">

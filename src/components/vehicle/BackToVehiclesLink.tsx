@@ -10,7 +10,7 @@ const BackToVehiclesLink = () => {
         className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
       >
         <ArrowLeft className="h-4 w-4 mr-1" />
-        Back to Vehicles
+        Retour aux Véhicules
       </Link>
     </div>
   );
