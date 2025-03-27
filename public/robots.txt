@@ -1,14 +1,40 @@
+
+# Allow all search engine crawlers
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://bpraceloc.com/sitemap.xml
+
+# Specific rules for major crawlers
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-User-agent: Twitterbot
+User-agent: Yandexbot
+Allow: /
+
+User-agent: Baiduspider
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: Twitterbot
 Allow: /
+
+User-agent: TikTokBot
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Don't crawl these paths
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
