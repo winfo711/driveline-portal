@@ -25,7 +25,7 @@ const VehicleCard = ({ id, title, price, year, mileage, image, location, slug }:
     setImageLoaded(true); // Still set as loaded to remove loading spinner
   };
   
-  // Generate a default slug if one isn't provided
+  // Make sure we have a valid slug from the API or generate a fallback
   const vehicleSlug = slug || `vehicle-${id}`;
   
   return (

@@ -91,7 +91,7 @@ const Home = () => {
       mileage: listing.mileage,
       image: `https://admin.bpraceloc.com/storage/${listing.gallery[0]}`,
       location: listing.location,
-      slug: listing.slug || `vehicle-${listing.id}`
+      slug: listing.slug
     }));
   };
   
