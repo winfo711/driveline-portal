@@ -90,7 +90,8 @@ const Home = () => {
       year: parseInt(listing.year),
       mileage: listing.mileage,
       image: `https://admin.bpraceloc.com/storage/${listing.gallery[0]}`,
-      location: listing.location
+      location: listing.location,
+      slug: listing.slug || `vehicle-${listing.id}`
     }));
   };
   
@@ -214,6 +215,7 @@ const Home = () => {
                   mileage={vehicle.mileage}
                   image={vehicle.image}
                   location={vehicle.location}
+                  slug={vehicle.slug}
                 />
               ))}
             </div>
