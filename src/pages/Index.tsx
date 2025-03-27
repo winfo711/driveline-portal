@@ -1,5 +1,7 @@
 
 import Logo from "../components/Logo";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -13,18 +15,12 @@ const Index = () => {
           Découvrez notre sélection exclusive de véhicules de luxe adaptés à votre style de vie.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a 
-            href="/vehicles" 
-            className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
-          >
-            Parcourir les Véhicules
-          </a>
-          <a 
-            href="/how-it-works" 
-            className="px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
-          >
-            Comment Ça Marche
-          </a>
+          <Button asChild variant="default" size="lg">
+            <Link to="/vehicles">Parcourir les Véhicules</Link>
+          </Button>
+          <Button asChild variant="secondary" size="lg" className="bg-red-600 hover:bg-red-700 text-white">
+            <Link to="/how-it-works">Comment Ça Marche</Link>
+          </Button>
         </div>
       </div>
     </div>
