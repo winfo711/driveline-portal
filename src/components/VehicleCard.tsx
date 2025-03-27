@@ -25,9 +25,12 @@ const VehicleCard = ({ id, title, price, year, mileage, image, location, slug }:
     setImageLoaded(true); // Still set as loaded to remove loading spinner
   };
   
+  // Generate a default slug if one isn't provided
+  const vehicleSlug = slug || `vehicle-${id}`;
+  
   return (
     <Link 
-      to={`/vehicles/${slug}`}
+      to={`/vehicles/${vehicleSlug}`}
       className="group block overflow-hidden neo-morph hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
