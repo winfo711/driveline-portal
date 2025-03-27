@@ -1,4 +1,3 @@
-
 import { MapPin } from "lucide-react";
 
 const LocationMap = () => {
@@ -6,7 +5,7 @@ const LocationMap = () => {
     <div className="neo-morph p-6 md:p-8">
       <div className="flex items-center gap-3 mb-6">
         <MapPin className="h-6 w-6 text-primary" />
-        <h2 className="text-xl font-medium">Visitez Nos Établissements</h2>
+        <h2 className="text-xl font-medium">Visitez nos établissements</h2>
       </div>
       
       <div className="h-[400px] rounded-lg overflow-hidden">

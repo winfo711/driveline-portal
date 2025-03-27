@@ -24,7 +24,7 @@ const NotFound = () => {
         <Link to="/">
           <CustomButton>
             <Home className="h-4 w-4 mr-2" />
-            Retour à l'Accueil
+            Retour à l'accueil
           </CustomButton>
         </Link>
       </div>

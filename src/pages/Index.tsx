@@ -10,16 +10,16 @@ const Index = () => {
         <div className="flex justify-center mb-6">
           <Logo textSize="lg" iconSize={40} />
         </div>
-        <h1 className="text-4xl font-bold mb-4">Véhicules Premium pour Conducteurs Exigeants</h1>
+        <h1 className="text-4xl font-bold mb-4">Véhicules premium pour conducteurs exigeants</h1>
         <p className="text-xl text-gray-600 mb-8">
           Découvrez notre sélection exclusive de véhicules de luxe adaptés à votre style de vie.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild variant="default" size="lg">
-            <Link to="/vehicles">Parcourir les Véhicules</Link>
+            <Link to="/vehicles">Parcourir les véhicules</Link>
           </Button>
           <Button asChild variant="default" size="lg" className="bg-red-600 hover:bg-red-700">
-            <Link to="/how-it-works">Comment Ça Marche</Link>
+            <Link to="/how-it-works">Comment ça marche</Link>
           </Button>
         </div>
       </div>
