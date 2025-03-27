@@ -19,6 +19,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Legal = lazy(() => import("./pages/Legal"));
 const DataProtection = lazy(() => import("./pages/DataProtection"));
+const Cookies = lazy(() => import("./pages/Cookies"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Fallback loader
@@ -51,6 +52,7 @@ const App = () => (
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/legal" element={<Legal />} />
               <Route path="/data-protection" element={<DataProtection />} />
+              <Route path="/cookies" element={<Cookies />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
