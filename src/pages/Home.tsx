@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight, Star, Shield, Car, Search, FileText, Truck } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
@@ -283,38 +282,10 @@ const Home = () => {
         </div>
       </section>
       
-      <section className="py-16 md:py-24 bg-gradient-radial from-secondary to-secondary/20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium mb-4">Ce Que Disent Nos Clients</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Ne vous fiez pas seulement à notre parole. Voici ce que nos clients disent de leur expérience.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="neo-morph p-6 md:p-8 group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-yellow-400" />
-                  ))}
-                </div>
-                <p className="mb-6 text-foreground/90 group-hover:text-foreground transition-colors">"{testimonial.quote}"</p>
-                <div>
-                  <p className="font-medium">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium mb-4">Avis Vérifiés Google</h2>
+            <h2 className="text-2xl md:text-3xl font-medium mb-4">Avis vérifiés Google</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Découvrez ce que nos clients disent de nous sur Google.
             </p>
@@ -335,7 +306,7 @@ const Home = () => {
       
       <section className="py-16 md:py-24 bg-primary">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-medium mb-4 text-primary-foreground">Prêt à Trouver la Voiture de Vos Rêves ?</h2>
+          <h2 className="text-2xl md:text-3xl font-medium mb-4 text-primary-foreground">Prêt à trouver la voiture de vos rêves ?</h2>
           <p className="text-primary-foreground/80 max-w-xl mx-auto mb-8">
             Parcourez notre sélection de véhicules premium et faites le premier pas vers une expérience d'achat de voiture sans souci.
           </p>
@@ -345,7 +316,7 @@ const Home = () => {
               size="lg" 
               className="bg-white text-primary hover:bg-white/90"
             >
-              Explorer les Véhicules
+              Explorer les véhicules
             </CustomButton>
           </Link>
         </div>
