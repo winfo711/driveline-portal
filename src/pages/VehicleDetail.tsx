@@ -7,6 +7,17 @@ import CustomButton from "@/components/ui/custom-button";
 import { useToast } from "@/hooks/use-toast";
 import ImageGalleryModal from "@/components/ImageGalleryModal";
 import { formatPrice } from "@/lib/utils";
+import { 
+  getDisplayValue, 
+  transformFeatures, 
+  conditions, 
+  colors, 
+  transmissions, 
+  fuel_types,
+  drive_types,
+  features as featuresMap,
+  safety_features as safetyFeaturesMap
+} from "@/lib/vehicleData";
 
 // New API function to fetch vehicle by slug
 const fetchVehicleBySlug = async (slug: string) => {
@@ -94,6 +105,10 @@ const VehicleDetail = () => {
   const galleryImages = vehicle.gallery.map(
     (img: string) => `https://admin.bpraceloc.com/storage/${img}`
   );
+  
+  // Transform features and safety features using our utility functions
+  const displayFeatures = transformFeatures(vehicle.features, featuresMap);
+  const displaySafetyFeatures = transformFeatures(vehicle.safety_features, safetyFeaturesMap);
   
   return (
     <div className="page-container">
@@ -195,7 +210,7 @@ const VehicleDetail = () => {
                   <Shield className="h-5 w-5 text-primary mt-0.5" />
                   <div>
                     <p className="text-sm text-muted-foreground">Condition</p>
-                    <p>{vehicle.condition}</p>
+                    <p>{getDisplayValue(vehicle.condition, conditions, vehicle.condition)}</p>
                   </div>
                 </div>
               </div>
@@ -205,7 +220,7 @@ const VehicleDetail = () => {
                   <Car className="h-5 w-5 text-primary mt-0.5" />
                   <div>
                     <p className="text-sm text-muted-foreground">Exterior Color</p>
-                    <p>{vehicle.color}</p>
+                    <p>{getDisplayValue(vehicle.color, colors, vehicle.color)}</p>
                   </div>
                 </div>
                 
@@ -213,7 +228,7 @@ const VehicleDetail = () => {
                   <Settings className="h-5 w-5 text-primary mt-0.5" />
                   <div>
                     <p className="text-sm text-muted-foreground">Transmission</p>
-                    <p>{vehicle.transmission}</p>
+                    <p>{getDisplayValue(vehicle.transmission, transmissions, vehicle.transmission)}</p>
                   </div>
                 </div>
                 
@@ -221,7 +236,7 @@ const VehicleDetail = () => {
                   <Fuel className="h-5 w-5 text-primary mt-0.5" />
                   <div>
                     <p className="text-sm text-muted-foreground">Fuel Type</p>
-                    <p>{vehicle.fuel_type}</p>
+                    <p>{getDisplayValue(vehicle.fuel_type, fuel_types, vehicle.fuel_type)}</p>
                   </div>
                 </div>
                 
@@ -249,7 +264,7 @@ const VehicleDetail = () => {
           <div className="neo-morph p-6">
             <h2 className="text-2xl font-medium mb-4">Features & Equipment</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
-              {vehicle.features.map((feature: string, index: number) => (
+              {displayFeatures.map((feature: string, index: number) => (
                 <div key={index} className="flex items-center">
                   <div className="w-2 h-2 rounded-full bg-primary mr-3"></div>
                   <span>{feature}</span>
@@ -259,11 +274,11 @@ const VehicleDetail = () => {
           </div>
           
           {/* Safety Features */}
-          {vehicle.safety_features && vehicle.safety_features.length > 0 && (
+          {displaySafetyFeatures.length > 0 && (
             <div className="neo-morph p-6">
               <h2 className="text-2xl font-medium mb-4">Safety Features</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
-                {vehicle.safety_features.map((feature: string, index: number) => (
+                {displaySafetyFeatures.map((feature: string, index: number) => (
                   <div key={index} className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-primary mr-3"></div>
                     <span>{feature}</span>
