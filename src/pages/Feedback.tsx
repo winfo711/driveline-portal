@@ -10,7 +10,7 @@ const Feedback = () => {
   return (
     <div className="page-container">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-normal text-center mb-2">Évaluations et avis clients</h1>
+        <h1 className="text-3xl font-medium text-center mb-4 text-primary">Évaluations et avis clients</h1>
         <p className="text-center text-muted-foreground mb-8 text-sm max-w-xl mx-auto">
           Consultez les avis de nos clients ou partagez votre expérience avec notre service
         </p>
