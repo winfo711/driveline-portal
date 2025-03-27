@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -9,7 +10,6 @@ const Footer = () => {
       links: [
         { name: "À Propos", path: "/about" },
         { name: "Comment Ça Marche", path: "/how-it-works" },
-        { name: "Carrières", path: "/careers" },
         { name: "Contact", path: "/contact" },
       ],
     },
