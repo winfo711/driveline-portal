@@ -29,9 +29,9 @@ const Header = () => {
   }, []);
   
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Vehicles", path: "/vehicles" },
-    { name: "How It Works", path: "/how-it-works" },
+    { name: "Accueil", path: "/" },
+    { name: "Véhicules", path: "/vehicles" },
+    { name: "Comment Ça Marche", path: "/how-it-works" },
     { name: "FAQ", path: "/faq" },
     { name: "Contact", path: "/contact" },
   ];

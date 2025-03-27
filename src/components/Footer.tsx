@@ -6,11 +6,11 @@ const Footer = () => {
   
   const footerLinks = [
     {
-      title: "Company",
+      title: "Entreprise",
       links: [
-        { name: "About Us", path: "/about" },
-        { name: "How It Works", path: "/how-it-works" },
-        { name: "Careers", path: "/careers" },
+        { name: "À Propos", path: "/about" },
+        { name: "Comment Ça Marche", path: "/how-it-works" },
+        { name: "Carrières", path: "/careers" },
         { name: "Contact", path: "/contact" },
       ],
     },
@@ -18,16 +18,16 @@ const Footer = () => {
       title: "Support",
       links: [
         { name: "FAQ", path: "/faq" },
-        { name: "Help Center", path: "/help" },
-        { name: "Feedback", path: "/feedback" },
+        { name: "Centre d'Aide", path: "/help" },
+        { name: "Retour d'Expérience", path: "/feedback" },
       ],
     },
     {
-      title: "Legal",
+      title: "Légal",
       links: [
-        { name: "Terms", path: "/legal" },
-        { name: "Privacy", path: "/privacy" },
-        { name: "Data Protection", path: "/data-protection" },
+        { name: "Conditions", path: "/legal" },
+        { name: "Confidentialité", path: "/privacy" },
+        { name: "Protection des Données", path: "/data-protection" },
         { name: "Cookies", path: "/cookies" },
       ],
     },
@@ -43,7 +43,7 @@ const Footer = () => {
               <span className="text-primary/80">Elite</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs">
-              Premium automotive marketplace for discerning buyers and sellers.
+              Marché automobile premium pour acheteurs et vendeurs exigeants.
             </p>
           </div>
           
@@ -68,7 +68,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-100 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs text-muted-foreground">
-            © {currentYear} AutoElite. All rights reserved.
+            © {currentYear} AutoElite. Tous droits réservés.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-6">
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">

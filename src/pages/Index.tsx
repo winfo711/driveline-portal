@@ -8,22 +8,22 @@ const Index = () => {
         <div className="flex justify-center mb-6">
           <Logo textSize="lg" iconSize={40} />
         </div>
-        <h1 className="text-4xl font-bold mb-4">Premium Vehicles for Discerning Drivers</h1>
+        <h1 className="text-4xl font-bold mb-4">Véhicules Premium pour Conducteurs Exigeants</h1>
         <p className="text-xl text-gray-600 mb-8">
-          Discover our exclusive selection of luxury vehicles tailored to your lifestyle.
+          Découvrez notre sélection exclusive de véhicules de luxe adaptés à votre style de vie.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a 
             href="/vehicles" 
             className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
           >
-            Browse Vehicles
+            Parcourir les Véhicules
           </a>
           <a 
             href="/how-it-works" 
             className="px-6 py-3 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
           >
-            How It Works
+            Comment Ça Marche
           </a>
         </div>
       </div>
