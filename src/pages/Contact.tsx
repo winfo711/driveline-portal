@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Phone, Mail, MapPin, MessageCircle, Send } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
 import { useToast } from "@/hooks/use-toast";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ContactInfo = [
   {
@@ -27,6 +28,7 @@ const ContactInfo = [
 
 const Contact = () => {
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -187,12 +189,12 @@ const Contact = () => {
             <div>
               <CustomButton
                 type="submit"
-                className="w-full"
-                size="lg"
+                className={`w-full ${isMobile ? 'py-3' : ''}`}
+                size={isMobile ? "sm" : "lg"}
                 isLoading={isSubmitting}
               >
-                <Send className="h-4 w-4 mr-2" />
-                Envoyer le Message
+                <Send className={`${isMobile ? 'h-3.5 w-3.5' : 'h-4 w-4'} mr-2`} />
+                {isMobile ? "Envoyer" : "Envoyer le Message"}
               </CustomButton>
             </div>
           </form>
