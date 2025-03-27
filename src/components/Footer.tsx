@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -7,8 +8,8 @@ const Footer = () => {
     {
       title: "Entreprise",
       links: [
-        { name: "À Propos", path: "/about" },
-        { name: "Comment Ça Marche", path: "/how-it-works" },
+        { name: "À propos", path: "/about" },
+        { name: "Comment ça marche", path: "/how-it-works" },
         { name: "Contact", path: "/contact" },
       ],
     },
@@ -16,8 +17,8 @@ const Footer = () => {
       title: "Support",
       links: [
         { name: "FAQ", path: "/faq" },
-        { name: "Centre d'Aide", path: "/help" },
-        { name: "Retour d'Expérience", path: "/feedback" },
+        { name: "Centre d'aide", path: "/help" },
+        { name: "Retour d'expérience", path: "/feedback" },
       ],
     },
     {
@@ -25,7 +26,7 @@ const Footer = () => {
       links: [
         { name: "Conditions", path: "/legal" },
         { name: "Confidentialité", path: "/privacy" },
-        { name: "Protection des Données", path: "/data-protection" },
+        { name: "Protection des données", path: "/data-protection" },
         { name: "Cookies", path: "/cookies" },
       ],
     },

@@ -22,13 +22,13 @@ const VehicleInfoCard = ({ vehicle, onContactSellerClick }: VehicleInfoCardProps
         <div className="text-3xl font-medium text-primary">{formatPrice(parseFloat(vehicle.price))}</div>
         <div className="flex items-center mt-1 gap-1">
           <CircleDollarSign className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm text-muted-foreground">Financement Disponible</span>
+          <span className="text-sm text-muted-foreground">Financement disponible</span>
         </div>
       </div>
       
       <div className="space-y-4">
         <CustomButton className="w-full" size="lg">
-          Planifier un Essai
+          Planifier un essai
         </CustomButton>
         
         <CustomButton 
@@ -37,7 +37,7 @@ const VehicleInfoCard = ({ vehicle, onContactSellerClick }: VehicleInfoCardProps
           size="lg"
           onClick={onContactSellerClick}
         >
-          Contacter le Vendeur
+          Contacter le vendeur
         </CustomButton>
       </div>
       

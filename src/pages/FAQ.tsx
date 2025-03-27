@@ -60,7 +60,7 @@ const FAQ = () => {
   return (
     <div className="page-container">
       <div className="text-center mb-12">
-        <h1 className="font-medium mb-4">Foire Aux Questions</h1>
+        <h1 className="font-medium mb-4">Foire aux questions</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Trouvez des réponses aux questions courantes sur nos services, notre processus d'achat et nos politiques.
           Vous ne trouvez pas ce que vous cherchez? Contactez notre équipe de support.
@@ -141,12 +141,12 @@ const FAQ = () => {
       
       {/* Contact Section */}
       <div className="mt-16 neo-morph p-8 max-w-3xl mx-auto text-center">
-        <h2 className="text-xl font-medium mb-3">Encore des Questions?</h2>
+        <h2 className="text-xl font-medium mb-3">Encore des questions?</h2>
         <p className="text-muted-foreground mb-6">
           Notre équipe est là pour vous aider avec toutes vos questions ou préoccupations.
         </p>
         <Link to="/contact">
-          <CustomButton>Nous Contacter</CustomButton>
+          <CustomButton>Nous contacter</CustomButton>
         </Link>
       </div>
     </div>

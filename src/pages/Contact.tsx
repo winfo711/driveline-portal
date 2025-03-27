@@ -9,7 +9,7 @@ const Contact = () => {
   return (
     <div className="page-container">
       <div className="text-center mb-16">
-        <h1 className="font-medium mb-4">Contactez-Nous</h1>
+        <h1 className="font-medium mb-4">Contactez-nous</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Vous avez des questions concernant nos véhicules ou nos services ? Contactez notre équipe et nous nous ferons un plaisir de vous aider.
         </p>

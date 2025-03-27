@@ -15,7 +15,7 @@ interface VehicleDetailsProps {
 const VehicleDetails = ({ vehicle }: VehicleDetailsProps) => {
   return (
     <div className="neo-morph p-6">
-      <h2 className="text-2xl font-medium mb-6">Détails du Véhicule</h2>
+      <h2 className="text-2xl font-medium mb-6">Détails du véhicule</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">

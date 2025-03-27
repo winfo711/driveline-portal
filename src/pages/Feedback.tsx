@@ -10,13 +10,13 @@ const Feedback = () => {
 
   return (
     <div className="page-container">
-      <div className="max-w-5xl mx-auto"> {/* Increased max width from 4xl to 5xl */}
+      <div className="max-w-5xl mx-auto">
         <h1 className="text-3xl font-medium text-center mb-4 text-primary">Évaluations et avis clients</h1>
         <p className="text-center text-muted-foreground mb-8 text-sm max-w-xl mx-auto">
           Consultez les avis de nos clients ou partagez votre expérience avec notre service
         </p>
         
-        <div className="neo-morph p-6 mb-16"> {/* Increased bottom margin from mb-12 to mb-16 */}
+        <div className="neo-morph p-6 mb-16">
           <iframe 
             style={{ width: "100%", height: "800px" }} 
             scrolling="yes" 
