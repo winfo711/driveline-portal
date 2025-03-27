@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { ArrowRight, Star, Shield, Car, Search, FileText, Truck } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
@@ -184,9 +185,9 @@ const Home = () => {
       <section className="py-16 md:py-24 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-medium">Véhicules en Vedette</h2>
+            <h2 className="text-2xl md:text-3xl font-medium">Véhicules en vedette</h2>
             <Link to="/vehicles" className="text-sm font-medium flex items-center hover:text-primary transition-colors">
-              Voir Tous <ArrowRight className="h-4 w-4 ml-1" />
+              Voir tous <ArrowRight className="h-4 w-4 ml-1" />
             </Link>
           </div>
           
@@ -224,7 +225,7 @@ const Home = () => {
           <div className="mt-12 text-center">
             <Link to="/vehicles">
               <CustomButton size="lg">
-                Explorer Tous les Véhicules
+                Explorer tous les véhicules
               </CustomButton>
             </Link>
           </div>
@@ -234,7 +235,7 @@ const Home = () => {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium mb-4">Comment Ça Marche</h2>
+            <h2 className="text-2xl md:text-3xl font-medium mb-4">Comment ça marche</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Nous avons simplifié le processus d'achat de votre prochain véhicule pour le rendre fluide et agréable.
             </p>
@@ -245,7 +246,7 @@ const Home = () => {
               <div className="w-16 h-16 mx-auto mb-4 neo-morph rounded-full flex items-center justify-center">
                 <Search className="h-7 w-7 text-primary" />
               </div>
-              <h3 className="text-lg font-medium mb-2">Recherche & Sélection</h3>
+              <h3 className="text-lg font-medium mb-2">Recherche & sélection</h3>
               <p className="text-muted-foreground">
                 Explorez notre sélection soignée de véhicules premium et trouvez votre correspondance parfaite.
               </p>
@@ -255,7 +256,7 @@ const Home = () => {
               <div className="w-16 h-16 mx-auto mb-4 neo-morph rounded-full flex items-center justify-center">
                 <FileText className="h-7 w-7 text-primary" />
               </div>
-              <h3 className="text-lg font-medium mb-2">Financement Facile</h3>
+              <h3 className="text-lg font-medium mb-2">Financement facile</h3>
               <p className="text-muted-foreground">
                 Prix transparents et options de financement flexibles pour répondre à vos besoins.
               </p>
@@ -265,7 +266,7 @@ const Home = () => {
               <div className="w-16 h-16 mx-auto mb-4 neo-morph rounded-full flex items-center justify-center">
                 <Truck className="h-7 w-7 text-primary" />
               </div>
-              <h3 className="text-lg font-medium mb-2">Livraison à Domicile</h3>
+              <h3 className="text-lg font-medium mb-2">Livraison à domicile</h3>
               <p className="text-muted-foreground">
                 Votre nouveau véhicule livré directement à votre porte à votre convenance.
               </p>
@@ -275,14 +276,14 @@ const Home = () => {
           <div className="mt-12 text-center">
             <Link to="/how-it-works">
               <CustomButton variant="outline" size="lg">
-                En Savoir Plus sur Notre Processus
+                En savoir plus sur notre processus
               </CustomButton>
             </Link>
           </div>
         </div>
       </section>
       
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-24 bg-accent/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-2xl md:text-3xl font-medium mb-4">Avis vérifiés Google</h2>
