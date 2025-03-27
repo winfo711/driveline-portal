@@ -7,7 +7,11 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckCircle } from "lucide-react";
 
-const ContactForm = () => {
+interface ContactFormProps {
+  siteName?: string;
+}
+
+const ContactForm = ({ siteName = "AutoElite" }: ContactFormProps) => {
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const [formData, setFormData] = useState({
@@ -51,7 +55,7 @@ const ContactForm = () => {
       setIsSubmitted(true);
       toast({
         title: "Message Envoyé",
-        description: "Nous avons bien reçu votre message et vous répondrons rapidement.",
+        description: `Nous avons bien reçu votre message et vous répondrons rapidement.`,
       });
       
       // Reset form after showing success animation
