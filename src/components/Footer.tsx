@@ -1,8 +1,42 @@
 
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+
+// Type for the settings API response
+interface SettingsResponse {
+  error: boolean;
+  message: string;
+  data: {
+    settings: {
+      site_phone: string;
+      site_name: string;
+      site_address: string;
+      site_mail: string;
+      site_logo: string;
+      site_description: string;
+    }
+  }
+}
+
+const fetchSettings = async (): Promise<SettingsResponse> => {
+  const response = await fetch("https://admin.bpraceloc.com/api/setting");
+  if (!response.ok) {
+    throw new Error("Failed to fetch site settings");
+  }
+  return response.json();
+};
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  
+  const { data: settingsData } = useQuery({
+    queryKey: ['siteSettings'],
+    queryFn: fetchSettings
+  });
+
+  // Site information with fallback values
+  const siteName = settingsData?.data.settings.site_name || "AutoElite";
+  const siteDescription = settingsData?.data.settings.site_description || "Marché automobile premium pour acheteurs et vendeurs exigeants.";
   
   const footerLinks = [
     {
@@ -38,11 +72,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <Link to="/" className="text-2xl font-medium tracking-tight">
-              <span className="text-primary">Auto</span>
-              <span className="text-primary/80">Elite</span>
+              <span className="text-primary">{siteName.split(' ')[0] || "Auto"}</span>
+              <span className="text-primary/80">{siteName.split(' ')[1] || "Elite"}</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs">
-              Marché automobile premium pour acheteurs et vendeurs exigeants.
+              {siteDescription}
             </p>
           </div>
           
@@ -67,7 +101,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-100 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs text-muted-foreground">
-            © {currentYear} AutoElite. Tous droits réservés.
+            © {currentYear} {siteName}. Tous droits réservés.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-6">
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
