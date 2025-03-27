@@ -62,6 +62,11 @@ const Layout = () => {
       setIsPageChanging(false);
     }, 300);
     
+    // Don't update metadata for vehicle detail pages - handled in the component
+    if (location.pathname.startsWith('/vehicles/')) {
+      return () => clearTimeout(timer);
+    }
+    
     // Update page metadata based on current route
     const metadata = routeMetadata[location.pathname] || routeMetadata["/"];
     document.title = metadata.title;
