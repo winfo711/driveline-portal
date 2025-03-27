@@ -42,7 +42,7 @@ const VehicleCard = ({ id, title, price, year, mileage, image, location, slug }:
         
         {imageError ? (
           <div className="w-full h-full flex items-center justify-center bg-gray-100">
-            <p className="text-sm text-muted-foreground">Image unavailable</p>
+            <p className="text-sm text-muted-foreground">Image indisponible</p>
           </div>
         ) : (
           <img 
@@ -56,7 +56,7 @@ const VehicleCard = ({ id, title, price, year, mileage, image, location, slug }:
         
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
           <span className="px-3 py-1.5 bg-white/90 rounded-md text-sm font-medium transform translate-y-2 group-hover:translate-y-0 transition-transform">
-            View Details
+            Voir les Détails
           </span>
         </div>
       </div>
@@ -70,13 +70,13 @@ const VehicleCard = ({ id, title, price, year, mileage, image, location, slug }:
         <div className="flex items-center text-sm text-muted-foreground mb-3">
           <span>{year}</span>
           <span className="mx-2">•</span>
-          <span>{mileage.toLocaleString()} mi</span>
+          <span>{mileage.toLocaleString()} km</span>
           <span className="mx-2">•</span>
           <span className="truncate">{location}</span>
         </div>
         
         <div className="pt-2 border-t border-gray-100">
-          <span className="text-xs text-muted-foreground">View details →</span>
+          <span className="text-xs text-muted-foreground">Voir détails →</span>
         </div>
       </div>
     </Link>

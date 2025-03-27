@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { ArrowRight, Star, Shield, Car, Search, FileText, Truck } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
@@ -44,19 +45,19 @@ const Home = () => {
   
   const testimonials = [
     {
-      quote: "The most seamless car buying experience I've ever had. Everything from browsing to delivery was perfect.",
+      quote: "L'expérience d'achat de voiture la plus fluide que j'ai jamais eue. Tout, de la navigation à la livraison, était parfait.",
       author: "Emma Thompson",
-      role: "Verified Buyer"
+      role: "Acheteur Vérifié"
     },
     {
-      quote: "I was hesitant about buying a car online, but AutoElite made it incredibly simple and transparent.",
+      quote: "J'hésitais à acheter une voiture en ligne, mais AutoElite a rendu le processus incroyablement simple et transparent.",
       author: "Michael Chen",
-      role: "Verified Buyer"
+      role: "Acheteur Vérifié"
     },
     {
-      quote: "Their attention to detail and customer service is unmatched. I'll never buy a car any other way.",
+      quote: "Leur attention aux détails et leur service client sont inégalés. Je n'achèterai jamais une voiture autrement.",
       author: "Sarah Johnson",
-      role: "Verified Buyer"
+      role: "Acheteur Vérifié"
     }
   ];
   
@@ -100,13 +101,13 @@ const Home = () => {
   const getCurrentHeaderData = () => {
     if (!headerData?.data?.hearder || headerData.data.hearder.length === 0) {
       return {
-        title: "Discover Your Perfect Drive",
-        description: "Premium vehicles with transparent pricing and seamless experience."
+        title: "Découvrez Votre Conduite Parfaite",
+        description: "Véhicules premium avec des prix transparents et une expérience fluide."
       };
     }
     return {
-      title: headerData.data.hearder[currentImageIndex]?.title || "Discover Your Perfect Drive",
-      description: headerData.data.hearder[currentImageIndex]?.description || "Premium vehicles with transparent pricing and seamless experience."
+      title: headerData.data.hearder[currentImageIndex]?.title || "Découvrez Votre Conduite Parfaite",
+      description: headerData.data.hearder[currentImageIndex]?.description || "Véhicules premium avec des prix transparents et une expérience fluide."
     };
   };
   
@@ -143,12 +144,12 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/vehicles">
                 <CustomButton size="lg">
-                  Browse Vehicles
+                  Parcourir les Véhicules
                 </CustomButton>
               </Link>
               <Link to="/how-it-works">
                 <CustomButton variant="outline" size="lg" className="text-white border-white hover:bg-white/10 hover:text-white">
-                  How It Works
+                  Comment Ça Marche
                 </CustomButton>
               </Link>
             </div>
@@ -160,15 +161,15 @@ const Home = () => {
             <div className="glass-morph py-5 px-6 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-y-4">
               <div className="flex items-center justify-center md:justify-start gap-3">
                 <Shield className="h-5 w-5 text-white/70" />
-                <span className="text-sm text-white">Verified Vehicles</span>
+                <span className="text-sm text-white">Véhicules Vérifiés</span>
               </div>
               <div className="flex items-center justify-center gap-3">
                 <Star className="h-5 w-5 text-white/70" />
-                <span className="text-sm text-white">5-Day Returns</span>
+                <span className="text-sm text-white">Retours sous 5 Jours</span>
               </div>
               <div className="flex items-center justify-center md:justify-end gap-3">
                 <Car className="h-5 w-5 text-white/70" />
-                <span className="text-sm text-white">Home Delivery</span>
+                <span className="text-sm text-white">Livraison à Domicile</span>
               </div>
             </div>
           </div>
@@ -184,24 +185,24 @@ const Home = () => {
       <section className="py-16 md:py-24 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-medium">Featured Vehicles</h2>
+            <h2 className="text-2xl md:text-3xl font-medium">Véhicules en Vedette</h2>
             <Link to="/vehicles" className="text-sm font-medium flex items-center hover:text-primary transition-colors">
-              View All <ArrowRight className="h-4 w-4 ml-1" />
+              Voir Tous <ArrowRight className="h-4 w-4 ml-1" />
             </Link>
           </div>
           
           {isFeaturedLoading ? (
             <div className="py-16 text-center">
               <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin mx-auto"></div>
-              <p className="mt-4 text-muted-foreground">Loading featured vehicles...</p>
+              <p className="mt-4 text-muted-foreground">Chargement des véhicules en vedette...</p>
             </div>
           ) : featuredError ? (
             <div className="py-16 text-center">
-              <p className="text-muted-foreground">Unable to load featured vehicles at this time.</p>
+              <p className="text-muted-foreground">Impossible de charger les véhicules en vedette pour le moment.</p>
             </div>
           ) : featuredVehicles.length === 0 ? (
             <div className="py-16 text-center">
-              <p className="text-muted-foreground">No featured vehicles available at this time.</p>
+              <p className="text-muted-foreground">Aucun véhicule en vedette disponible pour le moment.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -224,7 +225,7 @@ const Home = () => {
           <div className="mt-12 text-center">
             <Link to="/vehicles">
               <CustomButton size="lg">
-                Explore All Vehicles
+                Explorer Tous les Véhicules
               </CustomButton>
             </Link>
           </div>
@@ -234,9 +235,9 @@ const Home = () => {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium mb-4">How It Works</h2>
+            <h2 className="text-2xl md:text-3xl font-medium mb-4">Comment Ça Marche</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              We've simplified the process of buying your next vehicle to make it seamless and enjoyable.
+              Nous avons simplifié le processus d'achat de votre prochain véhicule pour le rendre fluide et agréable.
             </p>
           </div>
           
@@ -245,9 +246,9 @@ const Home = () => {
               <div className="w-16 h-16 mx-auto mb-4 neo-morph rounded-full flex items-center justify-center">
                 <Search className="h-7 w-7 text-primary" />
               </div>
-              <h3 className="text-lg font-medium mb-2">Browse & Select</h3>
+              <h3 className="text-lg font-medium mb-2">Recherche & Sélection</h3>
               <p className="text-muted-foreground">
-                Explore our curated selection of premium vehicles and find your perfect match.
+                Explorez notre sélection soignée de véhicules premium et trouvez votre correspondance parfaite.
               </p>
             </div>
             
@@ -255,9 +256,9 @@ const Home = () => {
               <div className="w-16 h-16 mx-auto mb-4 neo-morph rounded-full flex items-center justify-center">
                 <FileText className="h-7 w-7 text-primary" />
               </div>
-              <h3 className="text-lg font-medium mb-2">Easy Financing</h3>
+              <h3 className="text-lg font-medium mb-2">Financement Facile</h3>
               <p className="text-muted-foreground">
-                Transparent pricing and flexible financing options to suit your needs.
+                Prix transparents et options de financement flexibles pour répondre à vos besoins.
               </p>
             </div>
             
@@ -265,9 +266,9 @@ const Home = () => {
               <div className="w-16 h-16 mx-auto mb-4 neo-morph rounded-full flex items-center justify-center">
                 <Truck className="h-7 w-7 text-primary" />
               </div>
-              <h3 className="text-lg font-medium mb-2">Home Delivery</h3>
+              <h3 className="text-lg font-medium mb-2">Livraison à Domicile</h3>
               <p className="text-muted-foreground">
-                Your new vehicle delivered right to your doorstep at your convenience.
+                Votre nouveau véhicule livré directement à votre porte à votre convenance.
               </p>
             </div>
           </div>
@@ -275,7 +276,7 @@ const Home = () => {
           <div className="mt-12 text-center">
             <Link to="/how-it-works">
               <CustomButton variant="outline" size="lg">
-                Learn More About Our Process
+                En Savoir Plus sur Notre Processus
               </CustomButton>
             </Link>
           </div>
@@ -285,9 +286,9 @@ const Home = () => {
       <section className="py-16 md:py-24 bg-gradient-radial from-secondary to-secondary/20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium mb-4">What Our Customers Say</h2>
+            <h2 className="text-2xl md:text-3xl font-medium mb-4">Ce Que Disent Nos Clients</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Don't just take our word for it. Here's what our customers have to say about their experience.
+              Ne vous fiez pas seulement à notre parole. Voici ce que nos clients disent de leur expérience.
             </p>
           </div>
           
@@ -313,9 +314,9 @@ const Home = () => {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-medium mb-4">Google Verified Reviews</h2>
+            <h2 className="text-2xl md:text-3xl font-medium mb-4">Avis Vérifiés Google</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              See what our clients are saying about us on Google.
+              Découvrez ce que nos clients disent de nous sur Google.
             </p>
           </div>
           
@@ -326,7 +327,7 @@ const Home = () => {
               className="responsive-item col-lg-12 col-md-12 col-sm-12" 
               src="https://digitalreviews.icu/api/widgets/embedded/1/3?tabs=no&hide_search=yes" 
               allowFullScreen
-              title="Google Verified Reviews"
+              title="Avis Vérifiés Google"
             ></iframe>
           </div>
         </div>
@@ -334,9 +335,9 @@ const Home = () => {
       
       <section className="py-16 md:py-24 bg-primary">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-medium mb-4 text-primary-foreground">Ready to Find Your Dream Car?</h2>
+          <h2 className="text-2xl md:text-3xl font-medium mb-4 text-primary-foreground">Prêt à Trouver la Voiture de Vos Rêves ?</h2>
           <p className="text-primary-foreground/80 max-w-xl mx-auto mb-8">
-            Browse our selection of premium vehicles and take the first step towards a seamless car buying experience.
+            Parcourez notre sélection de véhicules premium et faites le premier pas vers une expérience d'achat de voiture sans souci.
           </p>
           <Link to="/vehicles">
             <CustomButton 
@@ -344,7 +345,7 @@ const Home = () => {
               size="lg" 
               className="bg-white text-primary hover:bg-white/90"
             >
-              Explore Vehicles
+              Explorer les Véhicules
             </CustomButton>
           </Link>
         </div>
