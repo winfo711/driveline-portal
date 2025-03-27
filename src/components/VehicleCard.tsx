@@ -12,7 +12,7 @@ interface VehicleCardProps {
   mileage: number;
   image: string;
   location: string;
-  slug: string; // Add slug to props
+  slug: string;
 }
 
 const VehicleCard = ({ id, title, price, year, mileage, image, location, slug }: VehicleCardProps) => {
@@ -27,7 +27,7 @@ const VehicleCard = ({ id, title, price, year, mileage, image, location, slug }:
   
   return (
     <Link 
-      to={`/vehicles/${slug}`} // Use slug instead of id
+      to={`/vehicles/${slug}`}
       className="group block overflow-hidden neo-morph hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -61,7 +61,7 @@ const VehicleCard = ({ id, title, price, year, mileage, image, location, slug }:
       <div className="p-4 bg-white">
         <div className="flex justify-between items-start mb-2">
           <h3 className="font-medium text-base md:text-lg truncate">{title}</h3>
-          <span className="text-primary font-medium">{formatPrice(price)}</span>
+          <span className="text-primary font-medium">{formatPrice(price, '€')}</span>
         </div>
         
         <div className="flex items-center text-sm text-muted-foreground mb-3">
