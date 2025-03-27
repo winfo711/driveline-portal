@@ -15,6 +15,7 @@ const Vehicles = lazy(() => import("./pages/Vehicles"));
 const VehicleDetail = lazy(() => import("./pages/VehicleDetail"));
 const HowItWorks = lazy(() => import("./pages/HowItWorks"));
 const FAQ = lazy(() => import("./pages/FAQ"));
+const Feedback = lazy(() => import("./pages/Feedback"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Legal = lazy(() => import("./pages/Legal"));
@@ -48,6 +49,7 @@ const App = () => (
               <Route path="/vehicles/:slug" element={<VehicleDetail />} /> {/* Updated to use slug */}
               <Route path="/how-it-works" element={<HowItWorks />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/feedback" element={<Feedback />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/legal" element={<Legal />} />
