@@ -335,7 +335,9 @@ const Vehicles = () => {
                   <PaginationItem>
                     <PaginationPrevious 
                       onClick={() => handlePageChange(pagination.current_page - 1)} 
-                    />
+                    >
+                      Précédent
+                    </PaginationPrevious>
                   </PaginationItem>
                 )}
                 
@@ -345,7 +347,9 @@ const Vehicles = () => {
                   <PaginationItem>
                     <PaginationNext 
                       onClick={() => handlePageChange(pagination.current_page + 1)} 
-                    />
+                    >
+                      Suivant
+                    </PaginationNext>
                   </PaginationItem>
                 )}
               </PaginationContent>
