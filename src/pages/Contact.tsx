@@ -193,8 +193,8 @@ const Contact = () => {
                 size={isMobile ? "sm" : "lg"}
                 isLoading={isSubmitting}
               >
-                <Send className={`${isMobile ? 'h-3.5 w-3.5' : 'h-4 w-4'} mr-2`} />
-                {isMobile ? "Envoyer" : "Envoyer le Message"}
+                {!isSubmitting && <Send className="h-4 w-4 mr-2" style={{ transform: 'rotate(45deg)' }} />}
+                Envoyer le Message
               </CustomButton>
             </div>
           </form>
