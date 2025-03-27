@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import VehicleCard from "@/components/VehicleCard";
 import { Search, SlidersHorizontal, X } from "lucide-react";
@@ -46,7 +47,7 @@ interface PaginationData {
 const fetchVehicles = async (page: number) => {
   const response = await fetch(`https://admin.bpraceloc.com/api/cars?page=${page}`);
   if (!response.ok) {
-    throw new Error("Failed to fetch vehicles");
+    throw new Error("Échec du chargement des véhicules");
   }
   return response.json();
 };
@@ -161,9 +162,9 @@ const Vehicles = () => {
   return (
     <div className="page-container">
       <div className="mb-12 text-center">
-        <h1 className="font-medium mb-4">Discover Your Perfect Vehicle</h1>
+        <h1 className="font-medium mb-4">Découvrez Votre Véhicule Parfait</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Browse our premium selection of vehicles. Use the filters to find exactly what you're looking for.
+          Parcourez notre sélection premium de véhicules. Utilisez les filtres pour trouver exactement ce que vous cherchez.
         </p>
       </div>
       
@@ -174,7 +175,7 @@ const Vehicles = () => {
           </div>
           <input
             type="text"
-            placeholder="Search by make, model, or location..."
+            placeholder="Rechercher par marque, modèle ou lieu..."
             className="neo-morph-inset w-full py-2.5 pl-10 pr-4 text-foreground focus:outline-none"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -196,14 +197,14 @@ const Vehicles = () => {
           onClick={() => setFiltersOpen(!filtersOpen)}
         >
           <SlidersHorizontal className="h-5 w-5" />
-          <span>Filters</span>
+          <span>Filtres</span>
         </button>
       </div>
       
       {filtersOpen && (
         <div className="mb-8 neo-morph p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
           <div>
-            <h3 className="text-sm font-medium mb-3">Price Range</h3>
+            <h3 className="text-sm font-medium mb-3">Fourchette de Prix</h3>
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span className="text-sm text-muted-foreground">{priceRange[0].toLocaleString()} €</span>
@@ -231,7 +232,7 @@ const Vehicles = () => {
           </div>
           
           <div>
-            <h3 className="text-sm font-medium mb-3">Year Range</h3>
+            <h3 className="text-sm font-medium mb-3">Année</h3>
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span className="text-sm text-muted-foreground">{yearRange[0]}</span>
@@ -263,7 +264,7 @@ const Vehicles = () => {
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               onClick={resetFilters}
             >
-              Reset All Filters
+              Réinitialiser Tous les Filtres
             </button>
           </div>
         </div>
@@ -272,18 +273,18 @@ const Vehicles = () => {
       {isLoading && (
         <div className="py-16 flex justify-center items-center">
           <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
-          <p className="ml-3 text-muted-foreground">Loading vehicles...</p>
+          <p className="ml-3 text-muted-foreground">Chargement des véhicules...</p>
         </div>
       )}
       
       {error && (
         <div className="py-16 text-center">
-          <p className="text-destructive mb-4">Failed to load vehicles. Please try again later.</p>
+          <p className="text-destructive mb-4">Échec du chargement des véhicules. Veuillez réessayer plus tard.</p>
           <button 
             className="neo-morph px-4 py-2 text-primary hover:underline" 
             onClick={() => window.location.reload()}
           >
-            Refresh
+            Actualiser
           </button>
         </div>
       )}
@@ -291,8 +292,8 @@ const Vehicles = () => {
       {!isLoading && !error && (
         <div className="mb-6">
           <p className="text-sm text-muted-foreground">
-            Showing {filteredVehicles.length} vehicles
-            {pagination && ` (${pagination.total} total)`}
+            Affichage de {filteredVehicles.length} véhicules
+            {pagination && ` (${pagination.total} au total)`}
           </p>
         </div>
       )}
@@ -317,12 +318,12 @@ const Vehicles = () => {
             </div>
           ) : (
             <div className="py-16 text-center">
-              <p className="text-muted-foreground mb-4">No vehicles match your criteria.</p>
+              <p className="text-muted-foreground mb-4">Aucun véhicule ne correspond à vos critères.</p>
               <button 
                 className="text-primary hover:underline" 
                 onClick={resetFilters}
               >
-                Reset Filters
+                Réinitialiser les Filtres
               </button>
             </div>
           )}
@@ -356,7 +357,7 @@ const Vehicles = () => {
       {!isLoading && isFetching && (
         <div className="fixed bottom-4 right-4 bg-background/80 backdrop-blur-sm rounded-full shadow-lg p-3 flex items-center space-x-2">
           <div className="h-4 w-4 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
-          <span className="text-xs">Loading...</span>
+          <span className="text-xs">Chargement...</span>
         </div>
       )}
     </div>
