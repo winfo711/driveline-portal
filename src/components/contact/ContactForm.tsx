@@ -4,6 +4,8 @@ import { MessageCircle, Send } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { CheckCircle } from "lucide-react";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -16,6 +18,7 @@ const ContactForm = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -32,30 +35,48 @@ const ContactForm = () => {
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
+      setIsSubmitted(true);
+      
       toast({
         title: "Message Envoyé",
         description: "Nous avons bien reçu votre message et vous répondrons rapidement.",
       });
       
-      // Reset form fields
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-      });
+      // Reset form after showing success animation
+      setTimeout(() => {
+        setIsSubmitted(false);
+        // Reset form fields
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      }, 2000);
     }, 1500);
   };
 
   return (
-    <div className="neo-morph p-6 md:p-8">
+    <div className="neo-morph p-6 md:p-8 relative overflow-hidden">
       <div className="flex items-center gap-3 mb-6">
         <MessageCircle className="h-6 w-6 text-primary" />
         <h2 className="text-xl font-medium">Envoyez-Nous un Message</h2>
       </div>
       
-      <form onSubmit={handleSubmit} className="space-y-6">
+      {isSubmitted ? (
+        <div className="absolute inset-0 bg-background/95 flex flex-col items-center justify-center p-6 animate-scale-in">
+          <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4 animate-[scale-in_0.3s_ease-out,bounce_1s_ease-in-out_0.3s]">
+            <CheckCircle className="h-10 w-10 text-green-600" />
+          </div>
+          <h3 className="text-xl font-medium mb-2 animate-fade-in">Message Envoyé!</h3>
+          <p className="text-center text-muted-foreground animate-fade-in">
+            Merci de nous avoir contacté. Nous vous répondrons dans les plus brefs délais.
+          </p>
+        </div>
+      ) : null}
+      
+      <form onSubmit={handleSubmit} className={`space-y-6 transition-opacity duration-300 ${isSubmitted ? 'opacity-0' : 'opacity-100'}`}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium mb-2">
