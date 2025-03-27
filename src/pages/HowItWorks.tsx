@@ -6,44 +6,44 @@ import CustomButton from "@/components/ui/custom-button";
 const steps = [
   {
     id: 1,
-    title: "Browse Our Selection",
-    description: "Explore our curated selection of premium vehicles. Use detailed filters to find the perfect match for your needs and preferences.",
+    title: "Parcourez Notre Sélection",
+    description: "Explorez notre sélection soignée de véhicules premium. Utilisez des filtres détaillés pour trouver la correspondance parfaite à vos besoins et préférences.",
     icon: Search,
   },
   {
     id: 2,
-    title: "Vehicle Information",
-    description: "Each vehicle listing includes comprehensive information, detailed specifications, high-quality images, and transparent pricing.",
+    title: "Informations sur le Véhicule",
+    description: "Chaque annonce comprend des informations complètes, des spécifications détaillées, des images de haute qualité et des prix transparents.",
     icon: FileText,
   },
   {
     id: 3,
-    title: "Financing Options",
-    description: "Choose from flexible financing options tailored to your budget. Get pre-approved quickly with our streamlined application process.",
+    title: "Options de Financement",
+    description: "Choisissez parmi des options de financement flexibles adaptées à votre budget. Obtenez une pré-approbation rapidement grâce à notre processus simplifié.",
     icon: CreditCard,
   },
   {
     id: 4,
-    title: "Home Delivery",
-    description: "We'll deliver your vehicle directly to your doorstep at your convenience, or you can schedule a pickup at one of our locations.",
+    title: "Livraison à Domicile",
+    description: "Nous livrerons votre véhicule directement à votre porte à votre convenance, ou vous pouvez planifier un retrait à l'un de nos emplacements.",
     icon: Truck,
   }
 ];
 
 const benefits = [
   {
-    title: "5-Day Money-Back Guarantee",
-    description: "If you're not completely satisfied, return the vehicle within 5 days for a full refund.",
+    title: "Garantie Satisfait ou Remboursé de 5 Jours",
+    description: "Si vous n'êtes pas entièrement satisfait, retournez le véhicule dans les 5 jours pour un remboursement complet.",
     icon: Clock,
   },
   {
-    title: "150+ Point Inspection",
-    description: "Every vehicle undergoes a comprehensive inspection to ensure quality and reliability.",
+    title: "Inspection en 150+ Points",
+    description: "Chaque véhicule subit une inspection complète pour assurer sa qualité et sa fiabilité.",
     icon: Check,
   },
   {
-    title: "Extended Warranty Options",
-    description: "Additional peace of mind with our flexible warranty plans to protect your investment.",
+    title: "Options de Garantie Prolongée",
+    description: "Une tranquillité d'esprit supplémentaire avec nos plans de garantie flexibles pour protéger votre investissement.",
     icon: Shield,
   }
 ];
@@ -53,10 +53,10 @@ const HowItWorks = () => {
     <div className="page-container">
       {/* Hero Section */}
       <div className="text-center mb-16">
-        <h1 className="font-medium mb-4">How It Works</h1>
+        <h1 className="font-medium mb-4">Comment Ça Marche</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          We've reimagined the car buying experience to make it simple, transparent, and enjoyable.
-          From browsing to delivery, here's what you can expect.
+          Nous avons réinventé l'expérience d'achat automobile pour la rendre simple, transparente et agréable.
+          De la navigation à la livraison, voici ce à quoi vous pouvez vous attendre.
         </p>
       </div>
       
@@ -87,7 +87,7 @@ const HowItWorks = () => {
                   <div className={`pt-3 pl-20 md:pl-0 md:pt-0 ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
                     <div className="bg-white neo-morph p-6 md:mt-6">
                       <div className="inline-block px-3 py-1 rounded-full text-xs bg-primary/10 text-primary mb-3">
-                        Step {step.id}
+                        Étape {step.id}
                       </div>
                       <h3 className="text-xl font-medium mb-3">{step.title}</h3>
                       <p className="text-muted-foreground leading-relaxed">
@@ -105,9 +105,9 @@ const HowItWorks = () => {
       
       {/* Benefits Section */}
       <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-medium mb-3">The AutoElite Advantage</h2>
+        <h2 className="text-2xl md:text-3xl font-medium mb-3">L'Avantage AutoElite</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          We're committed to providing exceptional service and value with every purchase.
+          Nous nous engageons à fournir un service et une valeur exceptionnels à chaque achat.
         </p>
       </div>
       
@@ -127,26 +127,26 @@ const HowItWorks = () => {
       
       {/* FAQ Link */}
       <div className="text-center mb-16">
-        <h2 className="text-2xl font-medium mb-4">Have Questions?</h2>
+        <h2 className="text-2xl font-medium mb-4">Vous avez des questions?</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-          Check our frequently asked questions for more information about our process.
+          Consultez nos questions fréquemment posées pour plus d'informations sur notre processus.
         </p>
         <Link to="/faq">
-          <CustomButton>View FAQ</CustomButton>
+          <CustomButton>Voir la FAQ</CustomButton>
         </Link>
       </div>
       
       {/* CTA Section */}
       <div className="neo-morph p-8 md:p-12 flex flex-col md:flex-row items-center justify-between">
         <div>
-          <h2 className="text-2xl font-medium mb-3">Ready to Get Started?</h2>
+          <h2 className="text-2xl font-medium mb-3">Prêt à Commencer?</h2>
           <p className="text-muted-foreground max-w-xl">
-            Browse our premium selection of vehicles and take the first step towards a seamless buying experience.
+            Parcourez notre sélection premium de véhicules et faites le premier pas vers une expérience d'achat sans faille.
           </p>
         </div>
         <div className="mt-6 md:mt-0">
           <Link to="/vehicles">
-            <CustomButton size="lg">Browse Vehicles</CustomButton>
+            <CustomButton size="lg">Parcourir les Véhicules</CustomButton>
           </Link>
         </div>
       </div>

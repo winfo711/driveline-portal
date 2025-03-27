@@ -60,21 +60,21 @@ const FAQ = () => {
   return (
     <div className="page-container">
       <div className="text-center mb-12">
-        <h1 className="font-medium mb-4">Frequently Asked Questions</h1>
+        <h1 className="font-medium mb-4">Foire Aux Questions</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Find answers to common questions about our services, buying process, and policies.
-          Can't find what you're looking for? Contact our support team.
+          Trouvez des réponses aux questions courantes sur nos services, notre processus d'achat et nos politiques.
+          Vous ne trouvez pas ce que vous cherchez? Contactez notre équipe de support.
         </p>
       </div>
       
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
           <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
-          <p className="ml-2">Loading FAQ data...</p>
+          <p className="ml-2">Chargement des données FAQ...</p>
         </div>
       ) : error ? (
         <div className="text-center text-destructive p-8 neo-morph">
-          <p>There was an error loading the FAQ data. Please try again later.</p>
+          <p>Une erreur s'est produite lors du chargement des données FAQ. Veuillez réessayer plus tard.</p>
         </div>
       ) : (
         <>
@@ -86,7 +86,7 @@ const FAQ = () => {
               }`}
               onClick={() => setActiveCategory(null)}
             >
-              All
+              Tout
             </button>
             
             {categories.map(category => (
@@ -132,7 +132,7 @@ const FAQ = () => {
               ))
             ) : (
               <div className="text-center p-8 neo-morph">
-                <p className="text-muted-foreground">No FAQs found. Please check back later.</p>
+                <p className="text-muted-foreground">Aucune FAQ trouvée. Veuillez vérifier plus tard.</p>
               </div>
             )}
           </div>
@@ -141,12 +141,12 @@ const FAQ = () => {
       
       {/* Contact Section */}
       <div className="mt-16 neo-morph p-8 max-w-3xl mx-auto text-center">
-        <h2 className="text-xl font-medium mb-3">Still Have Questions?</h2>
+        <h2 className="text-xl font-medium mb-3">Encore des Questions?</h2>
         <p className="text-muted-foreground mb-6">
-          Our team is here to help you with any questions or concerns you may have.
+          Notre équipe est là pour vous aider avec toutes vos questions ou préoccupations.
         </p>
         <Link to="/contact">
-          <CustomButton>Contact Us</CustomButton>
+          <CustomButton>Nous Contacter</CustomButton>
         </Link>
       </div>
     </div>

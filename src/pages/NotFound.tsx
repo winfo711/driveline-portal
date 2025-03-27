@@ -19,12 +19,12 @@ const NotFound = () => {
       <div className="text-center neo-morph p-8 md:p-12 max-w-md">
         <h1 className="text-6xl font-medium mb-4">404</h1>
         <p className="text-xl text-muted-foreground mb-8">
-          The page you're looking for doesn't exist or has been moved.
+          La page que vous recherchez n'existe pas ou a été déplacée.
         </p>
         <Link to="/">
           <CustomButton>
             <Home className="h-4 w-4 mr-2" />
-            Return to Home
+            Retour à l'Accueil
           </CustomButton>
         </Link>
       </div>
