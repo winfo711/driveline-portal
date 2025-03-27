@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import Logo from "./Logo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,13 +45,7 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link 
-          to="/" 
-          className="text-2xl font-medium tracking-tight"
-        >
-          <span className="text-primary">Auto</span>
-          <span className="text-primary/80">Elite</span>
-        </Link>
+        <Logo textSize={scrolled ? "sm" : "md"} iconSize={scrolled ? 20 : 24} />
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
