@@ -17,7 +17,7 @@ const Feedback = () => {
         
         <div className="neo-morph p-6 mb-16"> {/* Increased bottom margin from mb-12 to mb-16 */}
           <iframe 
-            style={{ width: "100%", height: "800px" }} {/* Increased height from 700px to 800px */}
+            style={{ width: "100%", height: "800px" }} 
             scrolling="yes" 
             className="responsive-item" 
             src="https://digitalreviews.icu/api/widgets/embedded/1/3?tabs=no&hide_search=yes" 
