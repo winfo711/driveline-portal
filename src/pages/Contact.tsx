@@ -1,35 +1,11 @@
 
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { ContactInfo } from "@/components/contact/contactData";
 import ContactInfoCard from "@/components/contact/ContactInfoCard";
 import ContactForm from "@/components/contact/ContactForm";
 import LocationMap from "@/components/contact/LocationMap";
 import BusinessHours from "@/components/contact/BusinessHours";
-
-// Type for the settings API response
-interface SettingsResponse {
-  error: boolean;
-  message: string;
-  data: {
-    settings: {
-      site_phone: string;
-      site_name: string;
-      site_address: string;
-      site_mail: string;
-      site_logo: string;
-      site_description: string;
-    }
-  }
-}
-
-const fetchSettings = async (): Promise<SettingsResponse> => {
-  const response = await fetch("https://admin.bpraceloc.com/api/setting");
-  if (!response.ok) {
-    throw new Error("Failed to fetch site settings");
-  }
-  return response.json();
-};
+import { useSiteSettings } from "@/hooks/use-site-settings";
 
 const Contact = () => {
   const [contactInfo, setContactInfo] = useState(ContactInfo);
@@ -38,10 +14,7 @@ const Contact = () => {
     data: settingsData, 
     isLoading, 
     error 
-  } = useQuery({
-    queryKey: ['siteSettings'],
-    queryFn: fetchSettings
-  });
+  } = useSiteSettings();
   
   useEffect(() => {
     if (settingsData && !isLoading) {
@@ -91,7 +64,7 @@ const Contact = () => {
       
       {/* Contact Form and Map */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <ContactForm siteName={settingsData?.data.settings.site_name || "AutoElite"} />
+        <ContactForm siteName={settingsData?.data?.settings?.site_name || "AutoElite"} />
         <LocationMap />
       </div>
       

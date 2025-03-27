@@ -1,43 +1,15 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
-import { useQuery } from "@tanstack/react-query";
-
-// Type for the settings API response
-interface SettingsResponse {
-  error: boolean;
-  message: string;
-  data: {
-    settings: {
-      site_phone: string;
-      site_name: string;
-      site_address: string;
-      site_mail: string;
-      site_logo: string;
-      site_description: string;
-    }
-  }
-}
-
-const fetchSettings = async (): Promise<SettingsResponse> => {
-  const response = await fetch("https://admin.bpraceloc.com/api/setting");
-  if (!response.ok) {
-    throw new Error("Failed to fetch site settings");
-  }
-  return response.json();
-};
+import { useSiteSettings } from "@/hooks/use-site-settings";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   
-  const { data: settingsData } = useQuery({
-    queryKey: ['siteSettings'],
-    queryFn: fetchSettings
-  });
+  const { data: settingsData } = useSiteSettings();
   
   const siteName = settingsData?.data?.settings?.site_name || "AutoElite";
   

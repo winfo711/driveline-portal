@@ -6,14 +6,15 @@ import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckCircle } from "lucide-react";
+import { useSiteSettings } from "@/hooks/use-site-settings";
 
-interface ContactFormProps {
-  siteName?: string;
-}
-
-const ContactForm = ({ siteName = "AutoElite" }: ContactFormProps) => {
+const ContactForm = () => {
   const { toast } = useToast();
   const isMobile = useIsMobile();
+  const { data: settingsData } = useSiteSettings();
+  
+  const siteName = settingsData?.data?.settings?.site_name || "AutoElite";
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",

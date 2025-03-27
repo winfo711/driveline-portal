@@ -1,40 +1,12 @@
 
 import { MapPin } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-
-// Type for the settings API response
-interface SettingsResponse {
-  error: boolean;
-  message: string;
-  data: {
-    settings: {
-      site_phone: string;
-      site_name: string;
-      site_address: string;
-      site_mail: string;
-      site_logo: string;
-      site_description: string;
-      site_maps: string;
-    }
-  }
-}
-
-const fetchSettings = async (): Promise<SettingsResponse> => {
-  const response = await fetch("https://admin.bpraceloc.com/api/setting");
-  if (!response.ok) {
-    throw new Error("Failed to fetch site settings");
-  }
-  return response.json();
-};
+import { useSiteSettings } from "@/hooks/use-site-settings";
 
 const LocationMap = () => {
-  const { data: settingsData } = useQuery({
-    queryKey: ['siteSettings'],
-    queryFn: fetchSettings
-  });
+  const { data: settingsData } = useSiteSettings();
 
-  const mapUrl = settingsData?.data.settings.site_maps || "https://maps.app.goo.gl/oXQzgS9pzNBnSm7X6";
-  const address = settingsData?.data.settings.site_address || "123 Luxury Lane, San Francisco, CA 94103";
+  const mapUrl = settingsData?.data?.settings?.site_maps || "https://maps.app.goo.gl/oXQzgS9pzNBnSm7X6";
+  const address = settingsData?.data?.settings?.site_address || "123 Luxury Lane, San Francisco, CA 94103";
 
   return (
     <div className="neo-morph p-6 md:p-8">
