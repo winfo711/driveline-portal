@@ -5,114 +5,114 @@ const Privacy = () => {
   return (
     <div className="page-container">
       <div className="max-w-3xl mx-auto">
-        <h1 className="font-medium mb-8">Privacy Policy</h1>
+        <h1 className="font-medium mb-8">Politique de Confidentialité</h1>
         
         <div className="neo-morph p-6 md:p-8 mb-8">
           <h2 className="text-xl font-medium mb-4">1. Introduction</h2>
           <p className="text-muted-foreground mb-4">
-            At AutoElite, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+            Chez AutoElite, nous respectons votre vie privée et nous nous engageons à protéger vos données personnelles. Cette Politique de Confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous visitez notre site web ou utilisez nos services.
           </p>
           <p className="text-muted-foreground mb-4">
-            Please read this Privacy Policy carefully. If you do not agree with the terms of this Privacy Policy, please do not access our website or use our services.
+            Veuillez lire attentivement cette Politique de Confidentialité. Si vous n'acceptez pas les termes de cette Politique de Confidentialité, veuillez ne pas accéder à notre site web ou utiliser nos services.
           </p>
         </div>
         
         <div className="neo-morph p-6 md:p-8 mb-8">
-          <h2 className="text-xl font-medium mb-4">2. Information We Collect</h2>
+          <h2 className="text-xl font-medium mb-4">2. Informations que Nous Collectons</h2>
           <p className="text-muted-foreground mb-4">
-            We collect several types of information from and about users of our website and services, including:
+            Nous collectons plusieurs types d'informations auprès des utilisateurs de notre site web et de nos services, notamment :
           </p>
           <ul className="list-disc pl-6 text-muted-foreground space-y-2 mb-4">
-            <li>Personal information such as name, email address, telephone number, postal address, financial information, and government-issued identification numbers</li>
-            <li>Information about your vehicle interests and preferences</li>
-            <li>Technical data such as IP address, browser type, device information, and cookies</li>
-            <li>Usage data about how you interact with our website and services</li>
+            <li>Informations personnelles telles que nom, adresse e-mail, numéro de téléphone, adresse postale, informations financières et numéros d'identification émis par le gouvernement</li>
+            <li>Informations sur vos intérêts et préférences concernant les véhicules</li>
+            <li>Données techniques telles que l'adresse IP, le type de navigateur, les informations sur l'appareil et les cookies</li>
+            <li>Données d'utilisation sur la façon dont vous interagissez avec notre site web et nos services</li>
           </ul>
         </div>
         
         <div className="neo-morph p-6 md:p-8 mb-8">
-          <h2 className="text-xl font-medium mb-4">3. How We Collect Your Information</h2>
+          <h2 className="text-xl font-medium mb-4">3. Comment Nous Collectons Vos Informations</h2>
           <p className="text-muted-foreground mb-4">
-            We collect information:
+            Nous collectons des informations :
           </p>
           <ul className="list-disc pl-6 text-muted-foreground space-y-2 mb-4">
-            <li>Directly from you when you provide it to us (e.g., when you create an account, fill out forms, or correspond with us)</li>
-            <li>Automatically as you navigate through our website (using cookies and similar technologies)</li>
-            <li>From third parties, such as business partners, credit reporting agencies, and public databases</li>
+            <li>Directement de vous lorsque vous nous les fournissez (par exemple, lorsque vous créez un compte, remplissez des formulaires ou communiquez avec nous)</li>
+            <li>Automatiquement lorsque vous naviguez sur notre site web (en utilisant des cookies et des technologies similaires)</li>
+            <li>Auprès de tiers, tels que des partenaires commerciaux, des agences d'évaluation du crédit et des bases de données publiques</li>
           </ul>
         </div>
         
         <div className="neo-morph p-6 md:p-8 mb-8">
-          <h2 className="text-xl font-medium mb-4">4. How We Use Your Information</h2>
+          <h2 className="text-xl font-medium mb-4">4. Comment Nous Utilisons Vos Informations</h2>
           <p className="text-muted-foreground mb-4">
-            We may use the information we collect about you to:
+            Nous pouvons utiliser les informations que nous collectons à votre sujet pour :
           </p>
           <ul className="list-disc pl-6 text-muted-foreground space-y-2 mb-4">
-            <li>Provide, maintain, and improve our website and services</li>
-            <li>Process transactions and send related information</li>
-            <li>Verify your identity and eligibility for our services</li>
-            <li>Communicate with you about our services, promotions, and events</li>
-            <li>Personalize your experience and deliver content relevant to your interests</li>
-            <li>Analyze usage patterns and improve our website and services</li>
-            <li>Comply with legal obligations and protect our rights</li>
+            <li>Fournir, maintenir et améliorer notre site web et nos services</li>
+            <li>Traiter les transactions et envoyer des informations connexes</li>
+            <li>Vérifier votre identité et votre éligibilité à nos services</li>
+            <li>Communiquer avec vous au sujet de nos services, promotions et événements</li>
+            <li>Personnaliser votre expérience et vous proposer un contenu adapté à vos intérêts</li>
+            <li>Analyser les modèles d'utilisation et améliorer notre site web et nos services</li>
+            <li>Respecter nos obligations légales et protéger nos droits</li>
           </ul>
         </div>
         
         <div className="neo-morph p-6 md:p-8 mb-8">
-          <h2 className="text-xl font-medium mb-4">5. Disclosure of Your Information</h2>
+          <h2 className="text-xl font-medium mb-4">5. Divulgation de Vos Informations</h2>
           <p className="text-muted-foreground mb-4">
-            We may disclose your personal information to:
+            Nous pouvons divulguer vos informations personnelles à :
           </p>
           <ul className="list-disc pl-6 text-muted-foreground space-y-2 mb-4">
-            <li>Our subsidiaries and affiliates</li>
-            <li>Business partners, service providers, and contractors who perform services on our behalf</li>
-            <li>Financial institutions and payment processors to facilitate transactions</li>
-            <li>Government agencies or other third parties when required by law or to protect our rights</li>
-            <li>A buyer or other successor in the event of a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of our assets</li>
+            <li>Nos filiales et sociétés affiliées</li>
+            <li>Partenaires commerciaux, prestataires de services et sous-traitants qui fournissent des services pour notre compte</li>
+            <li>Institutions financières et processeurs de paiement pour faciliter les transactions</li>
+            <li>Organismes gouvernementaux ou autres tiers lorsque la loi l'exige ou pour protéger nos droits</li>
+            <li>Un acheteur ou autre successeur en cas de fusion, cession, restructuration, réorganisation, dissolution ou autre vente ou transfert de nos actifs</li>
           </ul>
         </div>
         
         <div className="neo-morph p-6 md:p-8 mb-8">
-          <h2 className="text-xl font-medium mb-4">6. Data Security</h2>
+          <h2 className="text-xl font-medium mb-4">6. Sécurité des Données</h2>
           <p className="text-muted-foreground mb-4">
-            We implement appropriate security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
+            Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos informations personnelles contre l'accès, l'altération, la divulgation ou la destruction non autorisés. Cependant, aucune méthode de transmission sur Internet ou de stockage électronique n'est sécurisée à 100%, et nous ne pouvons garantir une sécurité absolue.
           </p>
         </div>
         
         <div className="neo-morph p-6 md:p-8 mb-8">
-          <h2 className="text-xl font-medium mb-4">7. Your Choices</h2>
+          <h2 className="text-xl font-medium mb-4">7. Vos Choix</h2>
           <p className="text-muted-foreground mb-4">
-            You can review and change your personal information by logging into your account settings. You may also opt-out of receiving marketing communications from us by following the unsubscribe instructions included in each communication.
+            Vous pouvez consulter et modifier vos informations personnelles en vous connectant à votre compte. Vous pouvez également vous désabonner des communications marketing en suivant les instructions de désabonnement incluses dans chaque communication.
           </p>
         </div>
         
         <div className="neo-morph p-6 md:p-8 mb-8">
-          <h2 className="text-xl font-medium mb-4">8. Children's Privacy</h2>
+          <h2 className="text-xl font-medium mb-4">8. Protection des Enfants</h2>
           <p className="text-muted-foreground mb-4">
-            Our website and services are not intended for individuals under the age of 18, and we do not knowingly collect personal information from children under 18. If we learn we have collected or received personal information from a child under 18, we will delete that information.
+            Notre site web et nos services ne sont pas destinés aux personnes de moins de 18 ans, et nous ne collectons pas sciemment d'informations personnelles d'enfants de moins de 18 ans. Si nous apprenons que nous avons collecté ou reçu des informations personnelles d'un enfant de moins de 18 ans, nous supprimerons ces informations.
           </p>
         </div>
         
         <div className="neo-morph p-6 md:p-8 mb-8">
-          <h2 className="text-xl font-medium mb-4">9. Changes to Our Privacy Policy</h2>
+          <h2 className="text-xl font-medium mb-4">9. Modifications de Notre Politique de Confidentialité</h2>
           <p className="text-muted-foreground mb-4">
-            We may update our Privacy Policy from time to time. If we make material changes, we will notify you through the website or by other means. Your continued use of our website and services after such changes indicates your acceptance of the updated Privacy Policy.
+            Nous pouvons mettre à jour notre Politique de Confidentialité de temps à autre. Si nous apportons des modifications importantes, nous vous en informerons via le site web ou par d'autres moyens. Votre utilisation continue de notre site web et de nos services après ces modifications indique votre acceptation de la Politique de Confidentialité mise à jour.
           </p>
         </div>
         
         <div className="neo-morph p-6 md:p-8 mb-8">
-          <h2 className="text-xl font-medium mb-4">10. Contact Information</h2>
+          <h2 className="text-xl font-medium mb-4">10. Coordonnées</h2>
           <p className="text-muted-foreground mb-4">
-            If you have any questions or concerns about this Privacy Policy, please contact us at privacy@autoelite.com.
+            Si vous avez des questions ou des préoccupations concernant cette Politique de Confidentialité, veuillez nous contacter à privacy@autoelite.com.
           </p>
         </div>
         
         <div className="flex space-x-4 justify-center mt-12">
           <Link to="/legal" className="text-primary hover:underline">
-            Terms of Service
+            Conditions d'Utilisation
           </Link>
           <Link to="/data-protection" className="text-primary hover:underline">
-            Data Protection
+            Protection des Données
           </Link>
         </div>
       </div>
