@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Star, Shield, Calendar, Car, MapPin, GaugeCircle, Clock, Fuel, Settings, Key, CircleDollarSign } from "lucide-react";
@@ -6,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import CustomButton from "@/components/ui/custom-button";
 import { useToast } from "@/hooks/use-toast";
 import ImageGalleryModal from "@/components/ImageGalleryModal";
+import ContactSellerModal from "@/components/ContactSellerModal";
 import { formatPrice } from "@/lib/utils";
 import { 
   getDisplayValue, 
@@ -19,7 +19,6 @@ import {
   safety_features as safetyFeaturesMap
 } from "@/lib/vehicleData";
 
-// New API function to fetch vehicle by slug
 const fetchVehicleBySlug = async (slug: string) => {
   const response = await fetch(`https://admin.bpraceloc.com/api/car/${slug}`);
   if (!response.ok) {
@@ -33,6 +32,7 @@ const VehicleDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   
@@ -46,12 +46,10 @@ const VehicleDetail = () => {
     enabled: !!slug,
   });
   
-  // Basic page scroll reset
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
   
-  // Error handling with redirect
   useEffect(() => {
     if (error) {
       toast({
@@ -66,21 +64,17 @@ const VehicleDetail = () => {
     }
   }, [error, navigate, toast]);
 
-  // SEO Meta tags update effect
   useEffect(() => {
     if (vehicle) {
-      // Create detailed title and description
       const vehicleTitle = `${vehicle.name} ${vehicle.year} | BP Race Loc`;
       const vehicleDescription = `Découvrez ${vehicle.name} ${vehicle.year} à ${formatPrice(parseFloat(vehicle.price))}. ${getDisplayValue(vehicle.condition, conditions, vehicle.condition)}, ${vehicle.mileage.toLocaleString()} km, ${getDisplayValue(vehicle.transmission, transmissions, vehicle.transmission)}, ${getDisplayValue(vehicle.fuel_type, fuel_types, vehicle.fuel_type)}.`;
       
-      // Main meta tags
       document.title = vehicleTitle;
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         metaDescription.setAttribute("content", vehicleDescription);
       }
       
-      // Open Graph meta tags for Facebook and other platforms
       const ogTitle = document.querySelector('meta[property="og:title"]');
       const ogDescription = document.querySelector('meta[property="og:description"]');
       const ogImage = document.querySelector('meta[property="og:image"]');
@@ -93,7 +87,6 @@ const VehicleDetail = () => {
       }
       if (ogUrl) ogUrl.setAttribute("content", `https://bpraceloc.com/vehicles/${slug}`);
       
-      // Twitter Card meta tags
       const twitterTitle = document.querySelector('meta[name="twitter:title"]');
       const twitterDescription = document.querySelector('meta[name="twitter:description"]');
       const twitterImage = document.querySelector('meta[name="twitter:image"]');
@@ -104,7 +97,6 @@ const VehicleDetail = () => {
         twitterImage.setAttribute("content", `https://admin.bpraceloc.com/storage/${vehicle.gallery[0]}`);
       }
 
-      // Optional: Add structured data for Rich Results (Schema.org)
       const existingJsonLd = document.querySelector('script[type="application/ld+json"]');
       if (existingJsonLd) {
         existingJsonLd.remove();
@@ -157,10 +149,7 @@ const VehicleDetail = () => {
   };
   
   const handleContactSeller = () => {
-    toast({
-      title: "Message Sent",
-      description: "The seller will contact you shortly!",
-    });
+    setContactModalOpen(true);
   };
   
   const openGallery = (index: number) => {
@@ -183,18 +172,15 @@ const VehicleDetail = () => {
     return null;
   }
   
-  // Create variables for gallery images with base URL
   const galleryImages = vehicle.gallery.map(
     (img: string) => `https://admin.bpraceloc.com/storage/${img}`
   );
   
-  // Transform features and safety features using our utility functions
   const displayFeatures = transformFeatures(vehicle.features, featuresMap);
   const displaySafetyFeatures = transformFeatures(vehicle.safety_features, safetyFeaturesMap);
   
   return (
     <div className="page-container">
-      {/* Back Button */}
       <div className="mb-6">
         <Link 
           to="/vehicles" 
@@ -205,11 +191,8 @@ const VehicleDetail = () => {
         </Link>
       </div>
       
-      {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column - Images and Details */}
         <div className="lg:col-span-2 space-y-8">
-          {/* Image Gallery */}
           <div className="neo-morph overflow-hidden">
             <div className="relative aspect-[16/9] overflow-hidden cursor-pointer" onClick={() => openGallery(currentImageIndex)}>
               <img 
@@ -258,7 +241,6 @@ const VehicleDetail = () => {
             </div>
           </div>
           
-          {/* Vehicle Details */}
           <div className="neo-morph p-6">
             <h2 className="text-2xl font-medium mb-6">Vehicle Details</h2>
             
@@ -333,7 +315,6 @@ const VehicleDetail = () => {
             </div>
           </div>
           
-          {/* Description */}
           <div className="neo-morph p-6">
             <h2 className="text-2xl font-medium mb-4">Description</h2>
             <div 
@@ -342,7 +323,6 @@ const VehicleDetail = () => {
             />
           </div>
           
-          {/* Features */}
           <div className="neo-morph p-6">
             <h2 className="text-2xl font-medium mb-4">Features & Equipment</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
@@ -355,7 +335,6 @@ const VehicleDetail = () => {
             </div>
           </div>
           
-          {/* Safety Features */}
           {displaySafetyFeatures.length > 0 && (
             <div className="neo-morph p-6">
               <h2 className="text-2xl font-medium mb-4">Safety Features</h2>
@@ -371,9 +350,7 @@ const VehicleDetail = () => {
           )}
         </div>
         
-        {/* Right Column - Pricing and Contact */}
         <div className="space-y-6">
-          {/* Price Card */}
           <div className="neo-morph p-6 sticky top-24">
             <div className="mb-4">
               <h1 className="text-2xl font-medium">{vehicle.name}</h1>
@@ -438,12 +415,17 @@ const VehicleDetail = () => {
         </div>
       </div>
 
-      {/* Fullscreen Image Gallery Modal */}
       <ImageGalleryModal 
         isOpen={galleryOpen}
         onClose={() => setGalleryOpen(false)}
         images={galleryImages}
         initialIndex={currentImageIndex}
+      />
+
+      <ContactSellerModal
+        isOpen={contactModalOpen}
+        onClose={() => setContactModalOpen(false)}
+        vehicleName={vehicle.name}
       />
     </div>
   );
