@@ -1,3 +1,4 @@
+
 import { MapPin } from "lucide-react";
 
 const LocationMap = () => {
@@ -24,16 +25,6 @@ const LocationMap = () => {
         <div>
           <h3 className="font-medium">Siège Social</h3>
           <p className="text-muted-foreground">123 Luxury Lane, San Francisco, CA 94103</p>
-        </div>
-        
-        <div>
-          <h3 className="font-medium">Succursale Los Angeles</h3>
-          <p className="text-muted-foreground">456 Premium Blvd, Los Angeles, CA 90001</p>
-        </div>
-        
-        <div>
-          <h3 className="font-medium">Succursale New York</h3>
-          <p className="text-muted-foreground">789 Elite Street, New York, NY 10001</p>
         </div>
       </div>
     </div>
