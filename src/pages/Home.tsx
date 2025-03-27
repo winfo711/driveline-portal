@@ -161,15 +161,15 @@ const Home = () => {
             <div className="glass-morph py-5 px-6 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-y-4">
               <div className="flex items-center justify-center md:justify-start gap-3">
                 <Shield className="h-5 w-5 text-white/70" />
-                <span className="text-sm text-white">Véhicules Vérifiés</span>
+                <span className="text-sm text-white">Véhicules garanties 12 mois</span>
               </div>
               <div className="flex items-center justify-center gap-3">
                 <Star className="h-5 w-5 text-white/70" />
-                <span className="text-sm text-white">Retours sous 5 Jours</span>
+                <span className="text-sm text-white">Possibilité de rétractation sous 14 jours</span>
               </div>
               <div className="flex items-center justify-center md:justify-end gap-3">
                 <Car className="h-5 w-5 text-white/70" />
-                <span className="text-sm text-white">Livraison à Domicile</span>
+                <span className="text-sm text-white">Possibilité de livraison à domicile</span>
               </div>
             </div>
           </div>
