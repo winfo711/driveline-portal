@@ -10,9 +10,9 @@ const Feedback = () => {
   return (
     <div className="page-container">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-center mb-6">Avis et Commentaires</h1>
-        <p className="text-center text-muted-foreground mb-8">
-          Découvrez ce que nos clients disent de nous ou laissez votre propre avis sur notre service.
+        <h1 className="text-2xl font-normal text-center mb-2">Évaluations et avis clients</h1>
+        <p className="text-center text-muted-foreground mb-8 text-sm max-w-xl mx-auto">
+          Consultez les avis de nos clients ou partagez votre expérience avec notre service
         </p>
         
         <div className="neo-morph p-6 mb-12">
@@ -27,9 +27,9 @@ const Feedback = () => {
         </div>
         
         <div className="text-center p-8 neo-morph">
-          <h2 className="text-xl font-medium mb-3">Nous Apprécions Vos Commentaires</h2>
-          <p className="text-muted-foreground mb-6">
-            Vos avis nous aident à améliorer continuellement notre service. Merci de prendre le temps de partager votre expérience.
+          <h2 className="text-xl font-normal mb-3">Votre avis compte</h2>
+          <p className="text-muted-foreground mb-6 text-sm max-w-md mx-auto">
+            Vos commentaires nous aident à améliorer continuellement notre service.
           </p>
           <a 
             href="https://g.page/r/CZyCxQy4h4YYEB0/review" 
