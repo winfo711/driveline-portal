@@ -6,15 +6,21 @@ type LogoProps = {
   textSize?: "sm" | "md" | "lg";
   iconSize?: number;
   className?: string;
+  siteName?: string;
 };
 
-const Logo = ({ textSize = "md", iconSize = 24, className = "" }: LogoProps) => {
+const Logo = ({ textSize = "md", iconSize = 24, className = "", siteName = "AutoElite" }: LogoProps) => {
   // Define text size classes
   const textSizeClasses = {
     sm: "text-lg",
     md: "text-2xl",
     lg: "text-3xl",
   };
+
+  // Split site name into two parts for styling
+  const nameParts = siteName.split(' ');
+  const firstPart = nameParts[0] || "Auto";
+  const secondPart = nameParts.slice(1).join(' ') || "Elite";
 
   return (
     <Link 
@@ -25,8 +31,8 @@ const Logo = ({ textSize = "md", iconSize = 24, className = "" }: LogoProps) => 
         <Car size={iconSize} className="text-primary" />
       </div>
       <div className={textSizeClasses[textSize]}>
-        <span className="text-primary">Auto</span>
-        <span className="text-primary/80">Elite</span>
+        <span className="text-primary">{firstPart}</span>
+        <span className="text-primary/80">{secondPart}</span>
       </div>
     </Link>
   );
