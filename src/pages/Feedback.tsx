@@ -1,5 +1,6 @@
 
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Feedback = () => {
   useEffect(() => {
@@ -31,16 +32,14 @@ const Feedback = () => {
           <p className="text-muted-foreground mb-6 text-sm max-w-md mx-auto">
             Vos commentaires nous aident à améliorer continuellement notre service.
           </p>
-          <a 
-            href="https://g.page/r/CZyCxQy4h4YYEB0/review" 
-            target="_blank" 
-            rel="noopener noreferrer"
+          <Link 
+            to="/faq" 
             className="inline-block"
           >
             <button className="bg-primary hover:bg-primary/90 text-white py-2 px-6 rounded-full transition-colors">
-              Laisser un Avis Google
+              Consulter notre FAQ
             </button>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
