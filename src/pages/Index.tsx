@@ -16,7 +16,7 @@ const Index = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild variant="default" size="lg">
-            <Link to="/vehicles">Parcourir les véhicules</Link>
+            <Link to="/vehicles">Voir nos véhicules</Link>
           </Button>
           <Button asChild variant="default" size="lg" className="bg-red-600 hover:bg-red-700">
             <Link to="/how-it-works">Comment ça marche</Link>
