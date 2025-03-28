@@ -64,7 +64,7 @@ const Contact = () => {
       
       {/* Contact Form and Map */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <ContactForm siteName={settingsData?.data?.settings?.site_name || "AutoElite"} />
+        <ContactForm />
         <LocationMap />
       </div>
       

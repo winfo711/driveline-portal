@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { MessageCircle, Send } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
@@ -8,12 +7,16 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckCircle } from "lucide-react";
 import { useSiteSettings } from "@/hooks/use-site-settings";
 
-const ContactForm = () => {
+interface ContactFormProps {
+  siteName?: string;
+}
+
+const ContactForm = ({ siteName }: ContactFormProps) => {
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { data: settingsData } = useSiteSettings();
   
-  const siteName = settingsData?.data?.settings?.site_name || "AutoElite";
+  const siteNameValue = siteName || settingsData?.data?.settings?.site_name || "AutoElite";
   
   const [formData, setFormData] = useState({
     name: "",
@@ -52,17 +55,14 @@ const ContactForm = () => {
         throw new Error(`Error: ${response.status}`);
       }
       
-      // Handle success
       setIsSubmitted(true);
       toast({
         title: "Message Envoyé",
         description: `Nous avons bien reçu votre message et vous répondrons rapidement.`,
       });
       
-      // Reset form after showing success animation
       setTimeout(() => {
         setIsSubmitted(false);
-        // Reset form fields
         setFormData({
           name: "",
           email: "",
