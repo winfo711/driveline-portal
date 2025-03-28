@@ -37,12 +37,12 @@ const VehicleInfoCard = ({ vehicle, onContactSellerClick, siteName = "BP Race Lo
       
       <div className="space-y-4">
         <CustomButton 
-          className="w-full" 
+          className="w-full flex items-center justify-center" 
           size="lg"
           onClick={handleFicheTechniqueClick}
         >
-          <FileText className="inline-block mr-2 h-4 w-4" />
-          <span className="inline-block">Fiche technique</span>
+          <FileText className="mr-2 h-4 w-4" />
+          Fiche technique
         </CustomButton>
         
         <CustomButton 

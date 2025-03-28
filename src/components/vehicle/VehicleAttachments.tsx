@@ -1,7 +1,9 @@
 
+import { useState } from "react";
 import { X, FileText, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CustomButton from "@/components/ui/custom-button";
+import PDFViewer from "./PDFViewer";
 
 interface VehicleAttachmentsProps {
   attachments: string[];
@@ -11,6 +13,7 @@ interface VehicleAttachmentsProps {
 
 const VehicleAttachments = ({ attachments, onClose, onContactClick }: VehicleAttachmentsProps) => {
   const apiBaseUrl = "https://admin.bpraceloc.com/storage";
+  const [selectedPdf, setSelectedPdf] = useState<{ url: string; name: string } | null>(null);
   
   if (!attachments || attachments.length === 0) {
     return (
@@ -36,6 +39,14 @@ const VehicleAttachments = ({ attachments, onClose, onContactClick }: VehicleAtt
     );
   }
 
+  const handlePdfClick = (attachment: string) => {
+    const fileName = attachment.split('/').pop() || `Document.pdf`;
+    setSelectedPdf({
+      url: `${apiBaseUrl}/${attachment}`,
+      name: fileName
+    });
+  };
+
   return (
     <div className="mt-4 p-4 bg-secondary/20 rounded-lg">
       <div className="flex justify-between items-center mb-3">
@@ -53,23 +64,38 @@ const VehicleAttachments = ({ attachments, onClose, onContactClick }: VehicleAtt
             : fileName;
             
           return (
-            <a 
+            <div 
               key={index}
-              href={`${apiBaseUrl}/${attachment}`}
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex items-center justify-between p-2 rounded-md hover:bg-secondary/30 transition-colors"
-              download={fileName}
             >
-              <div className="flex items-center gap-2">
+              <button
+                className="flex items-center gap-2 flex-1 text-left"
+                onClick={() => handlePdfClick(attachment)}
+              >
                 <FileText className="h-4 w-4 text-primary" />
                 <span className="text-sm">{displayName}</span>
-              </div>
-              <Download className="h-4 w-4 text-muted-foreground" />
-            </a>
+              </button>
+              <a
+                href={`${apiBaseUrl}/${attachment}`}
+                download={fileName}
+                className="p-1 hover:bg-secondary rounded-md"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Download className="h-4 w-4 text-muted-foreground" />
+              </a>
+            </div>
           );
         })}
       </div>
+
+      {selectedPdf && (
+        <PDFViewer
+          file={selectedPdf.url}
+          fileName={selectedPdf.name}
+          isOpen={!!selectedPdf}
+          onClose={() => setSelectedPdf(null)}
+        />
+      )}
     </div>
   );
 };
