@@ -6,9 +6,10 @@ import { formatPrice } from "@/lib/utils";
 interface VehicleInfoCardProps {
   vehicle: any;
   onContactSellerClick: () => void;
+  siteName?: string;
 }
 
-const VehicleInfoCard = ({ vehicle, onContactSellerClick }: VehicleInfoCardProps) => {
+const VehicleInfoCard = ({ vehicle, onContactSellerClick, siteName = "BP Race Loc" }: VehicleInfoCardProps) => {
   return (
     <div className="neo-morph p-6 sticky top-24">
       <div className="mb-4">
@@ -47,7 +48,7 @@ const VehicleInfoCard = ({ vehicle, onContactSellerClick }: VehicleInfoCardProps
             <Shield className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <p className="font-medium">BP Race Loc</p>
+            <p className="font-medium">{siteName}</p>
             <div className="flex items-center gap-1">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (

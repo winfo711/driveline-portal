@@ -14,6 +14,7 @@ import {
   getDisplayValue
 } from "@/lib/vehicleData";
 import { formatPrice } from "@/lib/utils";
+import { useSiteSettings } from "@/hooks/use-site-settings";
 import ContactSellerModal from "@/components/ContactSellerModal";
 import BackToVehiclesLink from "@/components/vehicle/BackToVehiclesLink";
 import VehicleGallery from "@/components/vehicle/VehicleGallery";
@@ -38,6 +39,9 @@ const VehicleDetail = () => {
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  
+  const { data: settingsData } = useSiteSettings();
+  const siteName = settingsData?.data?.settings?.site_name || "BP Race Loc";
   
   const { 
     data: vehicle, 
@@ -186,6 +190,7 @@ const VehicleDetail = () => {
           <VehicleInfoCard
             vehicle={vehicle}
             onContactSellerClick={handleContactSeller}
+            siteName={siteName}
           />
         </div>
       </div>
