@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import VehicleCard from "@/components/VehicleCard";
 import { Search, SlidersHorizontal, X } from "lucide-react";
@@ -44,7 +45,8 @@ interface PaginationData {
 }
 
 const fetchVehicles = async (page: number) => {
-  const response = await fetch(`https://admin.bpraceloc.com/api/cars?page=${page}`);
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://admin.bpraceloc.com/api';
+  const response = await fetch(`${apiBaseUrl}/cars?page=${page}`);
   if (!response.ok) {
     throw new Error("Échec du chargement des véhicules");
   }

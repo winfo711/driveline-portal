@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -23,7 +24,8 @@ import VehicleFeatures from "@/components/vehicle/VehicleFeatures";
 import VehicleSafetyFeatures from "@/components/vehicle/VehicleSafetyFeatures";
 
 const fetchVehicleBySlug = async (slug: string) => {
-  const response = await fetch(`https://admin.bpraceloc.com/api/car/${slug}`);
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://admin.bpraceloc.com/api';
+  const response = await fetch(`${apiBaseUrl}/car/${slug}`);
   if (!response.ok) {
     throw new Error("Failed to fetch vehicle details");
   }

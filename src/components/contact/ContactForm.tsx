@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { MessageCircle, Send } from "lucide-react";
 import CustomButton from "@/components/ui/custom-button";
@@ -15,6 +16,7 @@ const ContactForm = ({ siteName }: ContactFormProps) => {
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { data: settingsData } = useSiteSettings();
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://admin.bpraceloc.com/api';
   
   const siteNameValue = siteName || settingsData?.data?.settings?.site_name || "AutoElite";
   
@@ -43,7 +45,7 @@ const ContactForm = ({ siteName }: ContactFormProps) => {
     setSubmitError(null);
     
     try {
-      const response = await fetch('https://admin.bpraceloc.com/api/contact', {
+      const response = await fetch(`${apiBaseUrl}/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

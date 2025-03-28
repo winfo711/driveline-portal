@@ -19,8 +19,10 @@ export interface SettingsResponse {
 }
 
 export const useSiteSettings = () => {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://admin.bpraceloc.com/api';
+  
   const fetchSettings = async (): Promise<SettingsResponse> => {
-    const response = await fetch("https://admin.bpraceloc.com/api/setting");
+    const response = await fetch(`${apiBaseUrl}/setting`);
     if (!response.ok) {
       throw new Error("Failed to fetch site settings");
     }
