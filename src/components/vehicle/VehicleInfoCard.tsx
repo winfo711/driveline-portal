@@ -1,7 +1,9 @@
 
-import { Star, Shield, CircleDollarSign } from "lucide-react";
+import { Star, Shield, CircleDollarSign, FileText } from "lucide-react";
+import { useState } from "react";
 import CustomButton from "@/components/ui/custom-button";
 import { formatPrice } from "@/lib/utils";
+import VehicleAttachments from "./VehicleAttachments";
 
 interface VehicleInfoCardProps {
   vehicle: any;
@@ -10,6 +12,12 @@ interface VehicleInfoCardProps {
 }
 
 const VehicleInfoCard = ({ vehicle, onContactSellerClick, siteName = "BP Race Loc" }: VehicleInfoCardProps) => {
+  const [showAttachments, setShowAttachments] = useState(false);
+  
+  const handleFicheTechniqueClick = () => {
+    setShowAttachments(true);
+  };
+  
   return (
     <div className="neo-morph p-6 sticky top-24">
       <div className="mb-4">
@@ -28,8 +36,13 @@ const VehicleInfoCard = ({ vehicle, onContactSellerClick, siteName = "BP Race Lo
       </div>
       
       <div className="space-y-4">
-        <CustomButton className="w-full" size="lg">
-          Planifier un essai
+        <CustomButton 
+          className="w-full flex items-center justify-center gap-2" 
+          size="lg"
+          onClick={handleFicheTechniqueClick}
+        >
+          <FileText className="h-4 w-4" />
+          Fiche technique
         </CustomButton>
         
         <CustomButton 
@@ -41,6 +54,14 @@ const VehicleInfoCard = ({ vehicle, onContactSellerClick, siteName = "BP Race Lo
           Contacter le vendeur
         </CustomButton>
       </div>
+
+      {showAttachments && (
+        <VehicleAttachments 
+          attachments={vehicle.attachments || []} 
+          onClose={() => setShowAttachments(false)}
+          onContactClick={onContactSellerClick}
+        />
+      )}
       
       <div className="mt-6 pt-6 border-t border-gray-100">
         <div className="flex items-center gap-3">
