@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-200">
       <div className="text-center max-w-2xl px-6">
         <div className="flex justify-center mb-6">
           <Logo textSize="lg" iconSize={40} />
@@ -19,7 +19,7 @@ const Index = () => {
             <Link to="/vehicles">Voir nos véhicules</Link>
           </Button>
           <Button asChild variant="default" size="lg" className="bg-red-600 hover:bg-red-700">
-            <Link to="/how-it-works">Comment ça marche</Link>
+            <Link to="/how-it-works">Comment ça fonctionne</Link>
           </Button>
         </div>
       </div>
