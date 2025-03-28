@@ -1,12 +1,12 @@
 
 import { useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-import { ChevronLeft, ChevronRight, X, Loader2 } from 'lucide-react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { ChevronLeft, ChevronRight, X, Loader2, FileX } from 'lucide-react';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
 // Set up the worker for PDF.js
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 interface PDFViewerProps {
   file: string;
@@ -52,6 +52,8 @@ const PDFViewer = ({ file, fileName, isOpen, onClose }: PDFViewerProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto p-0">
+        <DialogTitle className="sr-only">Document: {fileName}</DialogTitle>
+        
         <div className="p-4 sticky top-0 bg-background z-10 border-b flex justify-between items-center">
           <h2 className="font-medium truncate max-w-[calc(100%-80px)]">{fileName}</h2>
           <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8">
@@ -69,27 +71,44 @@ const PDFViewer = ({ file, fileName, isOpen, onClose }: PDFViewerProps) => {
           
           {error && (
             <div className="flex flex-col items-center justify-center py-12">
+              <FileX className="h-16 w-16 text-destructive mb-2" />
               <p className="text-destructive font-medium">Erreur lors du chargement du PDF</p>
               <p className="mt-1 text-sm text-muted-foreground mb-4">Le document ne peut pas être affiché</p>
               <Button variant="outline" onClick={onClose}>Fermer</Button>
+              <div className="mt-4 text-sm text-muted-foreground">
+                <p>Essayez plutôt de télécharger le document</p>
+                <a 
+                  href={file}
+                  download={fileName}
+                  className="mt-2 inline-flex items-center px-4 py-2 border border-primary text-primary hover:bg-primary/10 rounded-md"
+                >
+                  Télécharger le PDF
+                </a>
+              </div>
             </div>
           )}
           
-          <Document
-            file={file}
-            onLoadSuccess={onDocumentLoadSuccess}
-            onLoadError={onDocumentLoadError}
-            loading={null}
-            className="flex flex-col items-center"
-          >
-            <Page 
-              pageNumber={pageNumber} 
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-              className="max-w-full"
-              scale={1}
-            />
-          </Document>
+          {!loading && !error && (
+            <Document
+              file={file}
+              onLoadSuccess={onDocumentLoadSuccess}
+              onLoadError={onDocumentLoadError}
+              loading={null}
+              className="flex flex-col items-center"
+              options={{
+                cMapUrl: 'https://unpkg.com/pdfjs-dist@3.4.120/cmaps/',
+                cMapPacked: true,
+              }}
+            >
+              <Page 
+                pageNumber={pageNumber} 
+                renderTextLayer={false}
+                renderAnnotationLayer={false}
+                className="max-w-full"
+                scale={1}
+              />
+            </Document>
+          )}
         </div>
         
         {!loading && !error && numPages && numPages > 0 && (

@@ -47,6 +47,20 @@ const VehicleAttachments = ({ attachments, onClose, onContactClick }: VehicleAtt
     });
   };
 
+  // Function to handle direct download without viewing
+  const handleDirectDownload = (attachment: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const fileName = attachment.split('/').pop() || `Document.pdf`;
+    const link = document.createElement('a');
+    link.href = `${apiBaseUrl}/${attachment}`;
+    link.download = fileName;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="mt-4 p-4 bg-secondary/20 rounded-lg">
       <div className="flex justify-between items-center mb-3">
@@ -75,14 +89,13 @@ const VehicleAttachments = ({ attachments, onClose, onContactClick }: VehicleAtt
                 <FileText className="h-4 w-4 text-primary" />
                 <span className="text-sm">{displayName}</span>
               </button>
-              <a
-                href={`${apiBaseUrl}/${attachment}`}
-                download={fileName}
+              <button
+                onClick={(e) => handleDirectDownload(attachment, e)}
                 className="p-1 hover:bg-secondary rounded-md"
-                onClick={(e) => e.stopPropagation()}
+                title="Télécharger le document"
               >
                 <Download className="h-4 w-4 text-muted-foreground" />
-              </a>
+              </button>
             </div>
           );
         })}
