@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -12,6 +13,7 @@ const Header = () => {
   const { data: settingsData } = useSiteSettings();
   
   const siteName = settingsData?.data?.settings?.site_name || "AutoElite";
+  const logoUrl = "https://admin.bpraceloc.com/storage/logos/logos/logo.png";
   
   // Close menu when navigating
   useEffect(() => {
@@ -53,6 +55,7 @@ const Header = () => {
           textSize={scrolled ? "sm" : "md"} 
           iconSize={scrolled ? 20 : 24} 
           siteName={siteName}
+          logoUrl={logoUrl}
         />
         
         {/* Desktop Navigation */}

@@ -7,9 +7,16 @@ type LogoProps = {
   iconSize?: number;
   className?: string;
   siteName?: string;
+  logoUrl?: string;
 };
 
-const Logo = ({ textSize = "md", iconSize = 24, className = "", siteName = "AutoElite" }: LogoProps) => {
+const Logo = ({ 
+  textSize = "md", 
+  iconSize = 24, 
+  className = "", 
+  siteName = "AutoElite",
+  logoUrl
+}: LogoProps) => {
   // Define text size classes
   const textSizeClasses = {
     sm: "text-lg",
@@ -27,13 +34,23 @@ const Logo = ({ textSize = "md", iconSize = 24, className = "", siteName = "Auto
       to="/" 
       className={`flex items-center gap-2 font-medium tracking-tight ${className}`}
     >
-      <div className="p-1 bg-primary/10 rounded-md">
-        <Car size={iconSize} className="text-primary" />
-      </div>
-      <div className={textSizeClasses[textSize]}>
-        <span className="text-primary">{firstPart}</span>
-        <span className="text-primary/80">{secondPart}</span>
-      </div>
+      {logoUrl ? (
+        <img 
+          src={logoUrl} 
+          alt={siteName}
+          className="h-10 w-auto"
+        />
+      ) : (
+        <>
+          <div className="p-1 bg-primary/10 rounded-md">
+            <Car size={iconSize} className="text-primary" />
+          </div>
+          <div className={textSizeClasses[textSize]}>
+            <span className="text-primary">{firstPart}</span>
+            <span className="text-primary/80">{secondPart}</span>
+          </div>
+        </>
+      )}
     </Link>
   );
 };
