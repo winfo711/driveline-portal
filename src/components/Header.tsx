@@ -4,11 +4,13 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
 import { useSiteSettings } from "@/hooks/use-site-settings";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const isMobile = useIsMobile();
   
   const { data: settingsData } = useSiteSettings();
   
@@ -91,16 +93,16 @@ const Header = () => {
       
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full glass-morph border-b border-gray-100/10 animate-fade-in">
-          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <div className="md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-md border-b border-gray-100/10 shadow-lg animate-fade-in">
+          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-2">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`text-sm transition-colors px-2 py-2 rounded-md ${
+                className={`text-sm transition-colors px-3 py-2.5 rounded-md ${
                   location.pathname === item.path
-                    ? "text-primary bg-gray-100/10"
-                    : "text-muted-foreground hover:bg-gray-100/5"
+                    ? "bg-primary/10 text-primary font-medium"
+                    : "text-foreground hover:bg-accent/50"
                 }`}
               >
                 {item.name}
